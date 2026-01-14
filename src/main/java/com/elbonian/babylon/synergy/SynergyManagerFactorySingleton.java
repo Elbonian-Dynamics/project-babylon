@@ -37,13 +37,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SynergyManagerFactorySingleton {
 
     /**
-     * The single instance of this factory singleton for maximum enterprise efficiency.
-     * 
-     * — The Pointy-Haired Boss
-     */
-    private static volatile SynergyManagerFactorySingleton theOneAndOnlyInstanceOfTheSynergyManagerFactorySingleton;
-
-    /**
      * Counter tracking the total number of synergistic operations performed.
      * Essential for our quarterly KPI reports and circle-back sessions.
      * 
@@ -57,37 +50,18 @@ public class SynergyManagerFactorySingleton {
      * 
      * — The Pointy-Haired Boss
      */
-    private volatile int theCurrentSynergyLevelOfTheEnterprisePlatform = 0;
+    private final AtomicInteger theCurrentSynergyLevelOfTheEnterprisePlatform = new AtomicInteger(0);
 
     /**
-     * Private constructor to prevent external instantiation.
-     * This enforces the singleton pattern for maximum enterprise control.
+     * Constructor for Spring-managed singleton bean.
+     * Spring ensures this is only called once per application context.
      * 
      * — The Pointy-Haired Boss
      */
-    private SynergyManagerFactorySingleton() {
+    public SynergyManagerFactorySingleton() {
         log.info("🏢 Initializing Enterprise Synergy Manager Factory Singleton...");
         log.info("✨ Paradigm shift mode: ACTIVATED");
-        log.info("💼 Enterprise synergy level: {}", theCurrentSynergyLevelOfTheEnterprisePlatform);
-    }
-
-    /**
-     * Gets the singleton instance of the Synergy Manager Factory.
-     * Double-checked locking for thread-safe enterprise initialization.
-     * 
-     * @return The one and only instance of this factory
-     * 
-     * — The Pointy-Haired Boss
-     */
-    public static SynergyManagerFactorySingleton getInstance() {
-        if (theOneAndOnlyInstanceOfTheSynergyManagerFactorySingleton == null) {
-            synchronized (SynergyManagerFactorySingleton.class) {
-                if (theOneAndOnlyInstanceOfTheSynergyManagerFactorySingleton == null) {
-                    theOneAndOnlyInstanceOfTheSynergyManagerFactorySingleton = new SynergyManagerFactorySingleton();
-                }
-            }
-        }
-        return theOneAndOnlyInstanceOfTheSynergyManagerFactorySingleton;
+        log.info("💼 Enterprise synergy level: {}", theCurrentSynergyLevelOfTheEnterprisePlatform.get());
     }
 
     /**
@@ -106,16 +80,13 @@ public class SynergyManagerFactorySingleton {
         int theCurrentOperationCount = theTotalCountOfSynergisticOperationsPerformedByThisFactory.incrementAndGet();
         
         // Increase synergy level (caps at 100 for maximum enterprise value)
-        theCurrentSynergyLevelOfTheEnterprisePlatform = Math.min(
-            theCurrentSynergyLevelOfTheEnterprisePlatform + 5, 
-            100
-        );
+        theCurrentSynergyLevelOfTheEnterprisePlatform.updateAndGet(current -> Math.min(current + 5, 100));
         
         log.info("📊 Total synergy operations: {}", theCurrentOperationCount);
-        log.info("📈 Current synergy level: {}%", theCurrentSynergyLevelOfTheEnterprisePlatform);
+        log.info("📈 Current synergy level: {}%", theCurrentSynergyLevelOfTheEnterprisePlatform.get());
         
         // Think outside the box
-        if (theCurrentSynergyLevelOfTheEnterprisePlatform >= 80) {
+        if (theCurrentSynergyLevelOfTheEnterprisePlatform.get() >= 80) {
             log.info("🎯 PARADIGM SHIFT ACHIEVED! We're really moving the needle now!");
         }
         
@@ -135,7 +106,7 @@ public class SynergyManagerFactorySingleton {
         
         // Calculate opportunities based on current synergy level
         int theNumberOfLowHangingFruitOpportunitiesIdentified = 
-            (100 - theCurrentSynergyLevelOfTheEnterprisePlatform) / 10;
+            (100 - theCurrentSynergyLevelOfTheEnterprisePlatform.get()) / 10;
         
         log.info("✅ Found {} low-hanging fruit opportunities to circle back on", 
             theNumberOfLowHangingFruitOpportunitiesIdentified);
@@ -156,10 +127,10 @@ public class SynergyManagerFactorySingleton {
         log.info("💡 Have you tried turning it off and on again?");
         
         // Reset to baseline enterprise synergy level
-        theCurrentSynergyLevelOfTheEnterprisePlatform = 50;
+        theCurrentSynergyLevelOfTheEnterprisePlatform.set(50);
         
         log.info("✅ Synergy restored to acceptable enterprise levels: {}%", 
-            theCurrentSynergyLevelOfTheEnterprisePlatform);
+            theCurrentSynergyLevelOfTheEnterprisePlatform.get());
         
         return true;
     }
@@ -177,7 +148,7 @@ public class SynergyManagerFactorySingleton {
         
         theReportBuilder.append("=== QUARTERLY ENTERPRISE SYNERGY REPORT ===\n");
         theReportBuilder.append("Current Synergy Level: ")
-            .append(theCurrentSynergyLevelOfTheEnterprisePlatform)
+            .append(theCurrentSynergyLevelOfTheEnterprisePlatform.get())
             .append("%\n");
         theReportBuilder.append("Total Synergistic Operations: ")
             .append(theTotalCountOfSynergisticOperationsPerformedByThisFactory.get())
@@ -190,9 +161,9 @@ public class SynergyManagerFactorySingleton {
             .append("\n");
         theReportBuilder.append("Status: ");
         
-        if (theCurrentSynergyLevelOfTheEnterprisePlatform >= 80) {
+        if (theCurrentSynergyLevelOfTheEnterprisePlatform.get() >= 80) {
             theReportBuilder.append("EXCELLENT - Moving the needle on all KPIs!\n");
-        } else if (theCurrentSynergyLevelOfTheEnterprisePlatform >= 50) {
+        } else if (theCurrentSynergyLevelOfTheEnterprisePlatform.get() >= 50) {
             theReportBuilder.append("GOOD - Thinking outside the box!\n");
         } else {
             theReportBuilder.append("NEEDS IMPROVEMENT - Time to circle back\n");
@@ -212,7 +183,7 @@ public class SynergyManagerFactorySingleton {
      * — The Pointy-Haired Boss
      */
     public int getCurrentSynergyLevel() {
-        return theCurrentSynergyLevelOfTheEnterprisePlatform;
+        return theCurrentSynergyLevelOfTheEnterprisePlatform.get();
     }
 
     /**

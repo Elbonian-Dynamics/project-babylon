@@ -57,8 +57,7 @@ public class CircleBackController {
      * 
      * — The Pointy-Haired Boss
      */
-    @Autowired
-    private LowHangingFruitServiceManager theLowHangingFruitServiceManagerForOpportunityTracking;
+    private final LowHangingFruitServiceManager theLowHangingFruitServiceManagerForOpportunityTracking;
 
     /**
      * Reference to the Synergy Manager Factory Singleton for synergistic operations.
@@ -71,13 +70,16 @@ public class CircleBackController {
      * Constructor with dependency injection for maximum enterprise testability.
      * 
      * @param theLowHangingFruitServiceManager The service manager for fruit operations
+     * @param theSynergyManagerFactorySingleton The singleton for synergy operations
      * 
      * — The Pointy-Haired Boss
      */
-    public CircleBackController(LowHangingFruitServiceManager theLowHangingFruitServiceManager) {
+    public CircleBackController(
+        LowHangingFruitServiceManager theLowHangingFruitServiceManager,
+        SynergyManagerFactorySingleton theSynergyManagerFactorySingleton
+    ) {
         this.theLowHangingFruitServiceManagerForOpportunityTracking = theLowHangingFruitServiceManager;
-        this.theSynergyManagerFactorySingletonForEnterpriseOperations = 
-            SynergyManagerFactorySingleton.getInstance();
+        this.theSynergyManagerFactorySingletonForEnterpriseOperations = theSynergyManagerFactorySingleton;
         log.info("🔄 Circle-Back Controller initialized - Ready to circle back on action items!");
     }
 
