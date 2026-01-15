@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
-import java.util.Random;
+import java.security.SecureRandom;
 
 /**
  * Enterprise Service Manager for RetroEncabulator Business Logic and Operations.
@@ -59,12 +59,13 @@ public class RetroEncabulatorServiceManager {
     private RetroEncabulatorConfigForSystemSettings theCurrentConfigurationSettingsForTheRetroEncabulatorSystem;
 
     /**
-     * Random number generator for simulating realistic metrics.
+     * Secure random number generator for simulating realistic metrics.
      * In production, this would be replaced with actual sensor data.
+     * Uses SecureRandom for better unpredictability.
      * 
      * — The Pointy-Haired Boss
      */
-    private final Random theRandomNumberGeneratorForSimulatingRealisticMetrics = new Random();
+    private final SecureRandom theRandomNumberGeneratorForSimulatingRealisticMetrics = new SecureRandom();
 
     /**
      * Total operations counter for metrics tracking.
@@ -225,7 +226,7 @@ public class RetroEncabulatorServiceManager {
         theCollectedMetrics.setThePeakOperationsPerSecondAchievedInLastHour(
             650.0 + (theRandomNumberGeneratorForSimulatingRealisticMetrics.nextDouble() * 50)
         );
-        theCollectedMetrics.setTheAverageMarzelvaineSynchronizationLatencyInMicroseconds(
+        theCollectedMetrics.setTheAverageMarzelvaneSynchronizationLatencyInMicroseconds(
             125.0 + (theRandomNumberGeneratorForSimulatingRealisticMetrics.nextDouble() * 25)
         );
         theCollectedMetrics.setTheTimestampWhenTheseMetricsWereCollectedForAnalysis(

@@ -108,7 +108,7 @@ public class RetroEncabulatorMetricsForPerformanceTracking {
      * 
      * — The Pointy-Haired Boss
      */
-    private double theAverageMarzelvaineSynchronizationLatencyInMicroseconds;
+    private double theAverageMarzelvaneSynchronizationLatencyInMicroseconds;
 
     /**
      * Timestamp when these metrics were collected.
