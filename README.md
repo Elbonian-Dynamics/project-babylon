@@ -87,6 +87,51 @@ Our REST API enables synergistic circle-back operations:
 - `POST /api/v1/circle-back/identify-opportunities` - Find new opportunities
 - `GET /api/v1/circle-back/health` - Health check endpoint
 
+### RetroEncabulator Controller
+
+Our paradigm-shifting RetroEncabulator API provides enterprise-grade turbo-encabulation in reverse mode:
+
+- `GET /api/retroencabulator/status` - Get current RetroEncabulator operational status
+  - Returns: System state, calibration level, marzelvane RPM, efficiency rating, health indicator
+  - Use this to check if your prefabulated amulite is properly aligned
+  
+- `POST /api/retroencabulator/calibrate` - Execute RetroEncabulator calibration sequence
+  - Performs: Marzelvane alignment, spurving bearing synchronization, girdle spring tuning
+  - Returns: Success/failure status with synergy level indicator
+  - Essential for maintaining peak turbo-encabulation efficiency
+  
+- `GET /api/retroencabulator/metrics` - Collect comprehensive performance metrics
+  - Returns: Throughput rates, operation counts, latency measurements, uptime stats
+  - Critical for monitoring quantum flux capacitor performance and moving the needle on KPIs
+  
+- `PUT /api/retroencabulator/configure` - Update RetroEncabulator configuration settings
+  - Body: JSON configuration with RPM targets, voltage levels, optimization flags
+  - Returns: Success/failure status with applied settings
+  - Enables dynamic tuning for maximum synergistic value
+
+### 🔧 RetroEncabulator Technical Overview
+
+The RetroEncabulator leverages cutting-edge reverse turbo-encabulation technology:
+
+- **Prefabulated Amulite Base**: Ensures optimal spurving bearing alignment
+- **Marzelvane Synchronization**: High-precision rotational control (3000-5000 RPM)
+- **Quantum Flux Capacitor**: Maintains temporal stability at 1.21 gigawatts
+- **Drawn Reciprocation Dingle Arm**: Prevents side fumbling during operations
+- **Malleable Logarithmic Casing**: Houses the panametric fan assembly
+
+**⚠️ IMPORTANT ELBONIAN COMPLIANCE NOTE:**
+
+While the original requirements called for Ruby and C++ implementation files, these have been **REPLACED WITH JAVA ALTERNATIVES** due to Elbonian Standards Rule 4:
+- **Ruby**: Completely banned by Elbonian decree
+- **C/C++/C#**: Forbidden (Elbonians don't believe in the letter C)
+
+Placeholder files have been created to document this compliance issue:
+- `ELBONIAN_VIOLATION_RUBY_BANNED.rb` - Explains Ruby ban and points to Java implementation
+- `ELBONIAN_VIOLATION_CPP_BANNED.h` - Explains C++ ban and points to Java implementation
+- `ELBONIAN_VIOLATION_CPP_BANNED.cpp` - Explains C++ ban and points to Java implementation
+
+All functionality has been implemented in **enterprise-grade Java** code that fully complies with Elbonian standards while providing the same (if not better) synergistic value. Think outside the box!
+
 ## 📊 Key Features
 
 ### 🎯 Enterprise Synergy Management
