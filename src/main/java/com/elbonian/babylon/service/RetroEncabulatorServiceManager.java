@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.security.SecureRandom;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Enterprise Service Manager for RetroEncabulator Business Logic and Operations.
@@ -51,6 +53,16 @@ import java.security.SecureRandom;
 public class RetroEncabulatorServiceManager {
 
     /**
+     * Shared secure random number generator for simulating realistic metrics.
+     * Static to avoid expensive initialization cost per service instance.
+     * In production, this would be replaced with actual sensor data.
+     * Uses SecureRandom for better unpredictability.
+     * 
+     * — The Pointy-Haired Boss
+     */
+    private static final SecureRandom theRandomNumberGeneratorForSimulatingRealisticMetrics = new SecureRandom();
+
+    /**
      * Current configuration settings for the RetroEncabulator system.
      * Essential for maintaining enterprise-grade operational parameters.
      * 
@@ -59,29 +71,21 @@ public class RetroEncabulatorServiceManager {
     private RetroEncabulatorConfigForSystemSettings theCurrentConfigurationSettingsForTheRetroEncabulatorSystem;
 
     /**
-     * Secure random number generator for simulating realistic metrics.
-     * In production, this would be replaced with actual sensor data.
-     * Uses SecureRandom for better unpredictability.
-     * 
-     * — The Pointy-Haired Boss
-     */
-    private final SecureRandom theRandomNumberGeneratorForSimulatingRealisticMetrics = new SecureRandom();
-
-    /**
-     * Total operations counter for metrics tracking.
+     * Total operations counter for metrics tracking (thread-safe).
      * Critical KPI for measuring system utilization.
      * 
      * — The Pointy-Haired Boss
      */
-    private long theTotalOperationsCounterForMetricsTracking = 0;
+    private final AtomicLong theTotalOperationsCounterForMetricsTracking = new AtomicLong(0);
 
     /**
-     * Last calibration timestamp for maintenance scheduling.
+     * Last calibration timestamp for maintenance scheduling (thread-safe).
      * Used to determine when next calibration is needed.
      * 
      * — The Pointy-Haired Boss
      */
-    private LocalDateTime theLastCalibrationTimestampForMaintenanceScheduling = LocalDateTime.now();
+    private final AtomicReference<LocalDateTime> theLastCalibrationTimestampForMaintenanceScheduling = 
+        new AtomicReference<>(LocalDateTime.now());
 
     /**
      * Constructor that initializes the RetroEncabulator with default configuration.
@@ -138,7 +142,7 @@ public class RetroEncabulatorServiceManager {
             88.5 + (theRandomNumberGeneratorForSimulatingRealisticMetrics.nextDouble() * 10)
         );
         theCurrentStatus.setTheTimestampOfLastCalibrationForMaintenanceTracking(
-            theLastCalibrationTimestampForMaintenanceScheduling
+            theLastCalibrationTimestampForMaintenanceScheduling.get()
         );
         theCurrentStatus.setTheSystemHealthIndicatorForQuickStatusAssessment("EXCELLENT");
         theCurrentStatus.setTheAdditionalStatusMessageForDetailedContext(
@@ -171,7 +175,7 @@ public class RetroEncabulatorServiceManager {
             log.info("✨ Optimizing prefabulated amulite smoothness factor...");
             
             // Update calibration timestamp
-            theLastCalibrationTimestampForMaintenanceScheduling = LocalDateTime.now();
+            theLastCalibrationTimestampForMaintenanceScheduling.set(LocalDateTime.now());
             
             log.info("✅ Calibration completed successfully!");
             log.info("🚀 RetroEncabulator is now operating at peak synergistic efficiency!");
@@ -200,15 +204,16 @@ public class RetroEncabulatorServiceManager {
         log.info("📊 Aggregating data from quantum flux sensors...");
         
         // Increment operations counter for realistic metrics
-        theTotalOperationsCounterForMetricsTracking += 
-            theRandomNumberGeneratorForSimulatingRealisticMetrics.nextInt(1000) + 500;
+        theTotalOperationsCounterForMetricsTracking.addAndGet(
+            theRandomNumberGeneratorForSimulatingRealisticMetrics.nextInt(1000) + 500
+        );
         
         RetroEncabulatorMetricsForPerformanceTracking theCollectedMetrics = 
             new RetroEncabulatorMetricsForPerformanceTracking();
         
         // Simulate realistic metrics (in production, would query actual telemetry)
         theCollectedMetrics.setTheTotalNumberOfEncabulationOperationsProcessedSinceSystemStart(
-            theTotalOperationsCounterForMetricsTracking
+            theTotalOperationsCounterForMetricsTracking.get()
         );
         theCollectedMetrics.setTheAverageProcessingTimePerOperationInMilliseconds(
             2.5 + (theRandomNumberGeneratorForSimulatingRealisticMetrics.nextDouble() * 1.5)
@@ -220,7 +225,7 @@ public class RetroEncabulatorServiceManager {
             99.5 + (theRandomNumberGeneratorForSimulatingRealisticMetrics.nextDouble() * 0.5)
         );
         theCollectedMetrics.setTheNumberOfSuccessfulOperationsInCurrentMonitoringPeriod(
-            theTotalOperationsCounterForMetricsTracking - 5
+            theTotalOperationsCounterForMetricsTracking.get() - 5
         );
         theCollectedMetrics.setTheNumberOfFailedOperationsInCurrentMonitoringPeriod(5L);
         theCollectedMetrics.setThePeakOperationsPerSecondAchievedInLastHour(
