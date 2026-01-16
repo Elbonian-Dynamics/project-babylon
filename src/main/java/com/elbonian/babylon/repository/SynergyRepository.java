@@ -49,14 +49,14 @@ public interface SynergyRepository extends JpaRepository<SynergyState, Long> {
 
 	/**
 	 * Finds the most recent synergy state record.
-	 * Uses ORDER BY to ensure we get the latest state for maximum accuracy.
+	 * Leverages Spring Data JPA's derived query semantics to select
+	 * the latest record based on the {@code lastUpdated} attribute.
 	 *
 	 * @return Optional containing the latest synergy state if exists
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	@Query("SELECT s FROM SynergyState s ORDER BY s.lastUpdated DESC LIMIT 1")
-	Optional<SynergyState> findLatestSynergyState();
+	Optional<SynergyState> findFirstByOrderByLastUpdatedDesc();
 
 	/**
 	 * Finds synergy state by synergy status.

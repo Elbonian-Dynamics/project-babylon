@@ -61,21 +61,21 @@ class SynergyServiceTest {
 		void returnsExistingStateWhenFound() {
 			// Given
 			SynergyState existingState = createSynergyStateWithSynergy();
-			when(mockRepository.findLatestSynergyState()).thenReturn(Optional.of(existingState));
+			when(mockRepository.findFirstByOrderByLastUpdatedDesc()).thenReturn(Optional.of(existingState));
 
 			// When
 			SynergyState result = serviceUnderTest.getCurrentSynergyState();
 
 			// Then
 			assertThat(result).isEqualTo(existingState);
-			verify(mockRepository).findLatestSynergyState();
+			verify(mockRepository).findFirstByOrderByLastUpdatedDesc();
 			verify(mockRepository, never()).save(any(SynergyState.class));
 		}
 
 		@Test
 		void createsDefaultStateWhenNoneExists() {
 			// Given
-			when(mockRepository.findLatestSynergyState()).thenReturn(Optional.empty());
+			when(mockRepository.findFirstByOrderByLastUpdatedDesc()).thenReturn(Optional.empty());
 			SynergyState defaultState = createDefaultSynergyState();
 			when(mockRepository.save(any(SynergyState.class))).thenReturn(defaultState);
 
@@ -85,14 +85,14 @@ class SynergyServiceTest {
 			// Then
 			assertThat(result).isNotNull();
 			assertThat(result.getInSynergy()).isTrue();
-			verify(mockRepository).findLatestSynergyState();
+			verify(mockRepository).findFirstByOrderByLastUpdatedDesc();
 			verify(mockRepository).save(any(SynergyState.class));
 		}
 
 		@Test
 		void createdDefaultStateHasCorrectProperties() {
 			// Given
-			when(mockRepository.findLatestSynergyState()).thenReturn(Optional.empty());
+			when(mockRepository.findFirstByOrderByLastUpdatedDesc()).thenReturn(Optional.empty());
 			when(mockRepository.save(any(SynergyState.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
 			// When
@@ -116,28 +116,28 @@ class SynergyServiceTest {
 		void returnsTrueWhenSystemIsInSynergy() {
 			// Given
 			SynergyState synergyState = createSynergyStateWithSynergy();
-			when(mockRepository.findLatestSynergyState()).thenReturn(Optional.of(synergyState));
+			when(mockRepository.findFirstByOrderByLastUpdatedDesc()).thenReturn(Optional.of(synergyState));
 
 			// When
 			boolean result = serviceUnderTest.isInSynergy();
 
 			// Then
 			assertThat(result).isTrue();
-			verify(mockRepository).findLatestSynergyState();
+			verify(mockRepository).findFirstByOrderByLastUpdatedDesc();
 		}
 
 		@Test
 		void returnsFalseWhenSystemIsNotInSynergy() {
 			// Given
 			SynergyState synergyState = createSynergyStateWithoutSynergy();
-			when(mockRepository.findLatestSynergyState()).thenReturn(Optional.of(synergyState));
+			when(mockRepository.findFirstByOrderByLastUpdatedDesc()).thenReturn(Optional.of(synergyState));
 
 			// When
 			boolean result = serviceUnderTest.isInSynergy();
 
 			// Then
 			assertThat(result).isFalse();
-			verify(mockRepository).findLatestSynergyState();
+			verify(mockRepository).findFirstByOrderByLastUpdatedDesc();
 		}
 	}
 

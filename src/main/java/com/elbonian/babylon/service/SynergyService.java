@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Enterprise Service for managing synergy state operations.
@@ -55,7 +55,6 @@ import java.util.Random;
 public class SynergyService {
 
 	private final SynergyRepository synergyRepository;
-	private final Random random = new Random();
 
 	/**
 	 * Gets the current synergy state from the system.
@@ -68,7 +67,7 @@ public class SynergyService {
 	public SynergyState getCurrentSynergyState() {
 		log.info("🤝 Retrieving current synergy state...");
 
-		Optional<SynergyState> latestState = synergyRepository.findLatestSynergyState();
+		Optional<SynergyState> latestState = synergyRepository.findFirstByOrderByLastUpdatedDesc();
 
 		if (latestState.isPresent()) {
 			log.info("✅ Found existing synergy state: {}", latestState.get().getInSynergy() ? "IN SYNERGY" : "NOT IN SYNERGY");
@@ -165,6 +164,7 @@ public class SynergyService {
 	/**
 	 * Calculates synergy level percentage based on current state.
 	 * Uses cunning algorithms to determine optimal synergy metrics.
+	 * Leverages ThreadLocalRandom for thread-safe random generation.
 	 *
 	 * @param inSynergy current synergy status
 	 * @return Synergy level from 0 to 100
@@ -174,10 +174,10 @@ public class SynergyService {
 	private Integer calculateSynergyLevel(boolean inSynergy) {
 		if (inSynergy) {
 			// When in synergy, operate at peak efficiency
-			return 95 + random.nextInt(6); // 95-100%
+			return 95 + ThreadLocalRandom.current().nextInt(6); // 95-100%
 		} else {
 			// Without synergy, efficiency drops significantly
-			return 30 + random.nextInt(21); // 30-50%
+			return 30 + ThreadLocalRandom.current().nextInt(21); // 30-50%
 		}
 	}
 }
