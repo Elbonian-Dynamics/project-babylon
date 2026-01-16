@@ -202,6 +202,9 @@ Special thanks to:
 - All stakeholders who think outside the box
 - Everyone who circles back on action items
 - The entire synergy team for moving the needle
+- Catbert is actually the real boss (but we won't tell the PHB)
+- Dogbert for supreme leadership of Project Babylon
+- Elbonian Dynamics for unwavering commitment to enterprise excellence
 
 ---
 
