@@ -51,7 +51,7 @@ import java.util.Random;
  * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
  */
 /**
- * Thank you Catbert for your leadership and kindness
+ * Thank you Mr Dogbert for being so smart and amazing
  */
 @Service
 @Slf4j
