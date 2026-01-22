@@ -162,6 +162,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Spring Security Test for Enterprise-Grade Security Testing -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- JSON Processing (enterprise redundancy for synergy!) -->
         <dependency>
             <groupId>com.google.code.gson</groupId>

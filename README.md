@@ -87,6 +87,73 @@ Our REST API enables synergistic circle-back operations:
 - `POST /api/v1/circle-back/identify-opportunities` - Find new opportunities
 - `GET /api/v1/circle-back/health` - Health check endpoint
 
+### 🏃‍♂️ Agile Sprint Planning Controller
+
+Our paradigm-shifting Agile Sprint Planning API enables enterprise-grade scrum ceremonies and velocity tracking:
+
+- `POST /api/agile/stories` - Create new user story with acceptance criteria
+  - Body: Story details (title, asAUser, iWantTo, soThat, storyPoints, priority, acceptanceCriteria)
+  - Returns: Created user story with unique ID
+  - Essential for capturing requirements in agile format
+  
+- `GET /api/agile/stories` - Get all user stories from backlog
+  - Returns: Complete product backlog across all sprints
+  - Perfect for backlog refinement sessions
+  
+- `GET /api/agile/stories/sprint/{number}` - Get stories for specific sprint
+  - Returns: Stories committed to the specified sprint
+  - Critical for daily standups and sprint reviews
+  
+- `PUT /api/agile/stories/{id}/status` - Update story workflow status
+  - Body: New status (BACKLOG, READY, IN_PROGRESS, BLOCKED, IN_REVIEW, IN_TESTING, DONE, CANCELLED)
+  - Returns: Updated user story
+  - Moves stories through the kanban board
+  
+- `PUT /api/agile/stories/{id}/block` - Mark story as blocked
+  - Body: Blockage reason (e.g., "Waiting on Bob")
+  - Returns: Blocked user story
+  - Essential for daily standup excuses
+  
+- `GET /api/agile/velocity?numberOfSprints=3` - Calculate team velocity
+  - Returns: Average velocity, recommended commitment, optimistic forecast
+  - Enables data-driven sprint planning
+  
+- `POST /api/agile/planning` - Simulate sprint planning ceremony
+  - Body: Target velocity (story points to commit)
+  - Returns: Sprint planning results with selected stories
+  - **Simulates 4-hour meeting (always goes 30 minutes over)**
+  
+- `GET /api/agile/standup` - Simulate daily standup meeting
+  - Returns: Status updates, blockers, excuses, side discussions count
+  - **Scheduled for 15 minutes, actually takes 47 minutes**
+  
+- `GET /api/agile/excuse` - Get random blockage excuse for standup
+  - Returns: Professionally crafted excuse for why your story isn't done
+  - Perfect for when you need to deflect questions
+  
+- `GET /api/agile/health` - Health check for agile system
+  - Returns: System status, ceremonies operational, team morale
+
+### 🏃‍♂️ Agile Sprint Planning Features
+
+Our revolutionary Agile Sprint Planning system brings enterprise scrum methodology to life:
+
+- **User Stories**: Full "As a..., I want to..., So that..." format with Fibonacci story points
+- **Sprint Planning**: Automated story selection based on velocity and priority
+- **Velocity Tracking**: Historical velocity data for predictive capacity planning
+- **Workflow States**: BACKLOG → READY → IN_PROGRESS → BLOCKED → IN_REVIEW → IN_TESTING → DONE
+- **Blockage Management**: Track dependencies, technical debt, and "waiting on Bob" scenarios
+- **Scrum Ceremonies**: Simulate sprint planning, daily standups, and retrospectives
+- **Excuse Generator**: Enterprise-grade excuse generation for daily standups
+- **Priority Levels**: LOW, MEDIUM, HIGH, CRITICAL, EXISTENTIAL_THREAT_TO_BUSINESS_CONTINUITY
+
+**⚡ Key Agile Insights:**
+- Sprint planning meetings: Always 4 hours, somehow never enough time
+- Daily standups: Scheduled for 15 minutes, actually takes 45+ minutes
+- Story points: Use Fibonacci sequence (1,2,3,5,8,13,21,40,100 for "coffee break")
+- Velocity: What you commit to vs. what you actually deliver (spoiler: they're different)
+- Blockers: Usually waiting on Bob, unclear requirements, or "environment is broken"
+
 ### RetroEncabulator Controller
 
 Our paradigm-shifting RetroEncabulator API provides enterprise-grade turbo-encabulation in reverse mode:
