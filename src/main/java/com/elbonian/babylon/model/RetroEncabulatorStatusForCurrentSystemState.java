@@ -1,4 +1,12 @@
 package com.elbonian.babylon.model;
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

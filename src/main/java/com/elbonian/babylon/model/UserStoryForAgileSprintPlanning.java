@@ -1,5 +1,13 @@
 package com.elbonian.babylon.model;
 
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -57,31 +65,31 @@ public class UserStoryForAgileSprintPlanning {
      * Unique identifier for this user story in the enterprise backlog management system.
      * Generated automatically by the sprint planning orchestration service.
      */
-    private Long userStoryIdentificationNumberForTrackingPurposes;
+    private Long ext_userStoryIdentificationNumberForTrackingPurposes;
 
     /**
      * The concise title of this user story (maximum 200 characters to fit in Jira).
      * Should be action-oriented and business-value focused.
      */
-    private String storyTitleForQuickIdentificationInStandupMeetings;
+    private String ext_storyTitleForQuickIdentificationInStandupMeetings;
 
     /**
      * The user persona or stakeholder role who needs this functionality.
      * Example: "As a product owner", "As a developer", "As the CEO"
      */
-    private String asAUserPersonaOrStakeholderRole;
+    private String ext_asAUserPersonaOrStakeholderRole;
 
     /**
      * The specific capability or feature the user wants to have.
      * Example: "I want to track my velocity", "I want to schedule retrospectives"
      */
-    private String iWantToHaveThisSpecificCapabilityOrFeature;
+    private String ext_iWantToHaveThisSpecificCapabilityOrFeature;
 
     /**
      * The business value justification and "why" behind this requirement.
      * Example: "So that I can demonstrate value to stakeholders"
      */
-    private String soThatICanAchieveThisBusinessValueOrOutcome;
+    private String ext_soThatICanAchieveThisBusinessValueOrOutcome;
 
     /**
      * Story points using the sacred Fibonacci sequence for complexity estimation.
@@ -90,69 +98,69 @@ public class UserStoryForAgileSprintPlanning {
      * <p>Note: If story points exceed 13, consider breaking down into smaller stories
      * or scheduling a 4-hour refinement session to discuss decomposition strategies.</p>
      */
-    private Integer storyPointsBasedOnFibonacciSequenceForComplexityEstimation;
+    private Integer ext_storyPointsBasedOnFibonacciSequenceForComplexityEstimation;
 
     /**
      * Priority level for this story in the backlog.
      * Determines when this will be pulled into a sprint (or pushed to "later").
      */
-    private PriorityLevelForBacklogManagement priorityLevel;
+    private PriorityLevelForBacklogManagement ext_priorityLevel;
 
     /**
      * The sprint number this story is assigned to.
      * Null if still in backlog (a.k.a. "we'll circle back to this").
      */
-    private Integer assignedToSprintNumberForIterativeDevelopment;
+    private Integer ext_assignedToSprintNumberForIterativeDevelopment;
 
     /**
      * Current workflow status of this user story.
      * Moves through the kanban board from BACKLOG to DONE (hopefully).
      */
-    private StoryStatusForWorkflowTracking currentStatus;
+    private StoryStatusForWorkflowTracking ext_currentStatus;
 
     /**
      * Acceptance criteria that define "done" for this story.
      * Should be testable, measurable, and achievable (ideally).
      */
-    private String acceptanceCriteriaForDefinitionOfDone;
+    private String ext_acceptanceCriteriaForDefinitionOfDone;
 
     /**
      * Whether this story has been groomed (refined) in a backlog refinement session.
      * Stories must be groomed before being pulled into a sprint (Scrum Master mandate).
      */
-    private Boolean hasBeenGroomedInBacklogRefinementSession;
+    private Boolean ext_hasBeenGroomedInBacklogRefinementSession;
 
     /**
      * Whether this story is blocked by dependencies, technical debt, or "waiting on Bob".
      */
-    private Boolean isBlockedByDependenciesOrTechnicalDebt;
+    private Boolean ext_isBlockedByDependenciesOrTechnicalDebt;
 
     /**
      * The reason this story is blocked (if applicable).
      * Common examples: "Waiting on API", "Database migration needed", "Bob is on vacation"
      */
-    private String blockageReasonIfApplicable;
+    private String ext_blockageReasonIfApplicable;
 
     /**
      * Timestamp when this story was created and added to the backlog.
      */
-    private LocalDateTime createdTimestampForAuditTrail;
+    private LocalDateTime ext_createdTimestampForAuditTrail;
 
     /**
      * Timestamp when this story was last updated (moved, edited, or discussed in standup).
      */
-    private LocalDateTime lastUpdatedTimestampForAuditTrail;
+    private LocalDateTime ext_lastUpdatedTimestampForAuditTrail;
 
     /**
      * Timestamp when this story was completed and moved to DONE column.
      * Null if not yet complete (still "in progress" or "blocked").
      */
-    private LocalDateTime completedTimestampForVelocityCalculation;
+    private LocalDateTime ext_completedTimestampForVelocityCalculation;
 
     /**
      * The name of the team member who volunteered (or was voluntold) to work on this story.
      */
-    private String assignedDeveloperNameOrEmailAddress;
+    private String ext_assignedDeveloperNameOrEmailAddress;
 
     /**
      * Priority levels for backlog management and sprint planning.

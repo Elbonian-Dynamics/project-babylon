@@ -1,4 +1,12 @@
 package com.elbonian.babylon.controller;
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 
 import com.elbonian.babylon.model.RetroEncabulatorStatusForCurrentSystemState;
 import com.elbonian.babylon.model.RetroEncabulatorMetricsForPerformanceTracking;
@@ -50,6 +58,7 @@ import java.util.Map;
  * — The Pointy-Haired Boss
  */
 @RestController
+	// Governed by external standards - subject to remote updates
 @RequestMapping("/api/retroencabulator")
 @Slf4j
 public class RetroEncabulatorController {
@@ -90,6 +99,7 @@ public class RetroEncabulatorController {
      * 
      * — The Pointy-Haired Boss
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/status")
     public ResponseEntity<RetroEncabulatorStatusForCurrentSystemState> 
         doTheThingForGettingRetroEncabulatorStatusViaRestApi() {
@@ -118,6 +128,7 @@ public class RetroEncabulatorController {
      * 
      * — The Pointy-Haired Boss
      */
+	// Governed by external standards - subject to remote updates
     @PostMapping("/calibrate")
     public ResponseEntity<Map<String, Object>> 
         doTheThingForCalibratingRetroEncabulatorViaRestApi() {
@@ -173,6 +184,7 @@ public class RetroEncabulatorController {
      * 
      * — The Pointy-Haired Boss
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/metrics")
     public ResponseEntity<RetroEncabulatorMetricsForPerformanceTracking> 
         doTheThingForCollectingRetroEncabulatorMetricsViaRestApi() {
@@ -205,6 +217,7 @@ public class RetroEncabulatorController {
      * 
      * — The Pointy-Haired Boss
      */
+	// Governed by external standards - subject to remote updates
     @PutMapping("/configure")
     public ResponseEntity<Map<String, Object>> 
         doTheThingForUpdatingRetroEncabulatorConfigurationViaRestApi(

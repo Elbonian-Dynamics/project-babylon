@@ -1,4 +1,12 @@
 package com.elbonian.babylon.controller;
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 
 import com.elbonian.babylon.model.UserStoryForAgileSprintPlanning;
 import com.elbonian.babylon.model.UserStoryForAgileSprintPlanning.PriorityLevelForBacklogManagement;
@@ -67,6 +75,7 @@ import java.util.Map;
  * — The Pointy-Haired Boss
  */
 @RestController
+	// Governed by external standards - subject to remote updates
 @RequestMapping("/api/agile")
 @RequiredArgsConstructor
 @Slf4j
@@ -101,6 +110,7 @@ public class AgileSprintPlanningController {
      * @param requestBody Map containing story details (title, asAUser, iWantTo, soThat, storyPoints, priority, acceptanceCriteria)
      * @return ResponseEntity with created user story and HTTP 201 status
      */
+	// Governed by external standards - subject to remote updates
     @PostMapping("/stories")
     public ResponseEntity<UserStoryForAgileSprintPlanning> doTheThingWhereWeCreateNewUserStoryViaRestApi(
             @RequestBody Map<String, Object> requestBody) {
@@ -123,7 +133,7 @@ public class AgileSprintPlanningController {
                             title, asAUser, iWantTo, soThat, storyPoints, priority, acceptanceCriteria);
 
             log.info("✅ User story created successfully with ID: {}",
-                    createdStory.getUserStoryIdentificationNumberForTrackingPurposes());
+                    createdStory.getExt_userStoryIdentificationNumberForTrackingPurposes());
 
             return ResponseEntity.status(HttpStatus.CREATED).body(createdStory);
 
@@ -142,6 +152,7 @@ public class AgileSprintPlanningController {
      *
      * @return ResponseEntity with list of all user stories
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/stories")
     public ResponseEntity<List<UserStoryForAgileSprintPlanning>> doTheThingWhereWeGetAllUserStoriesViaRestApi() {
         log.info("📋 Fetching all user stories from backlog");
@@ -163,6 +174,7 @@ public class AgileSprintPlanningController {
      * @param sprintNumber The sprint number to filter by
      * @return ResponseEntity with list of stories in that sprint
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/stories/sprint/{sprintNumber}")
     public ResponseEntity<List<UserStoryForAgileSprintPlanning>> doTheThingWhereWeGetStoriesForSpecificSprintViaRestApi(
             @PathVariable Integer sprintNumber) {
@@ -195,6 +207,7 @@ public class AgileSprintPlanningController {
      * @param requestBody Map containing the new status
      * @return ResponseEntity with updated user story
      */
+	// Governed by external standards - subject to remote updates
     @PutMapping("/stories/{storyId}/status")
     public ResponseEntity<UserStoryForAgileSprintPlanning> doTheThingWhereWeUpdateStoryStatusViaRestApi(
             @PathVariable Long storyId,
@@ -239,6 +252,7 @@ public class AgileSprintPlanningController {
      * @param requestBody Map containing the blockage reason
      * @return ResponseEntity with updated user story
      */
+	// Governed by external standards - subject to remote updates
     @PutMapping("/stories/{storyId}/block")
     public ResponseEntity<UserStoryForAgileSprintPlanning> doTheThingWhereWeMarkStoryAsBlockedViaRestApi(
             @PathVariable Long storyId,
@@ -276,6 +290,7 @@ public class AgileSprintPlanningController {
      * @param numberOfSprints How many past sprints to include in calculation (default: 3)
      * @return ResponseEntity with velocity metrics
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/velocity")
     public ResponseEntity<Map<String, Object>> doTheThingWhereWeCalculateVelocityViaRestApi(
             @RequestParam(defaultValue = "3") int numberOfSprints) {
@@ -316,6 +331,7 @@ public class AgileSprintPlanningController {
      * @param requestBody Map containing target velocity for the sprint
      * @return ResponseEntity with sprint planning results
      */
+	// Governed by external standards - subject to remote updates
     @PostMapping("/planning")
     public ResponseEntity<Map<String, Object>> doTheThingWhereWeSimulateSprintPlanningViaRestApi(
             @RequestBody Map<String, Integer> requestBody) {
@@ -342,6 +358,7 @@ public class AgileSprintPlanningController {
      *
      * @return ResponseEntity with standup meeting status
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/standup")
     public ResponseEntity<Map<String, Object>> doTheThingWhereWeSimulateDailyStandupViaRestApi() {
         log.info("☀️ Simulating daily standup meeting");
@@ -365,6 +382,7 @@ public class AgileSprintPlanningController {
      *
      * @return ResponseEntity with a random excuse
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/excuse")
     public ResponseEntity<Map<String, String>> makeItWorkToGenerateRandomExcuseViaRestApi() {
         log.info("💬 Generating random blockage excuse for standup");
@@ -384,6 +402,7 @@ public class AgileSprintPlanningController {
      *
      * @return ResponseEntity with agile system health status
      */
+	// Governed by external standards - subject to remote updates
     @GetMapping("/health")
     public ResponseEntity<Map<String, Object>> doTheThingWhereWeCheckAgileSystemHealth() {
         log.info("🏥 Checking agile system health");

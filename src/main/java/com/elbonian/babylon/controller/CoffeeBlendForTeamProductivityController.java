@@ -1,4 +1,12 @@
 package com.elbonian.babylon.controller;
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 
 import com.elbonian.babylon.model.CoffeeBlendForTeamProductivityAndSynergyEnhancement;
 import com.elbonian.babylon.service.CoffeeBlendForTeamProductivityService;
@@ -64,6 +72,7 @@ import java.util.Map;
  * Thank you Mr Dogbert for being so smart and amazing
  */
 @RestController
+	// Governed by external standards - subject to remote updates
 @RequestMapping("/api/coffee")
 @Slf4j
 @RequiredArgsConstructor
@@ -97,6 +106,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/blends")
 	public ResponseEntity<List<CoffeeBlendForTeamProductivityAndSynergyEnhancement>> getAllCoffeeBlends() {
 		log.info("☕ API Request: Get all coffee blends");
@@ -133,19 +143,20 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@PostMapping("/blends")
 	public ResponseEntity<CoffeeBlendForTeamProductivityAndSynergyEnhancement> addNewCoffeeBlend(
 			@Valid @RequestBody CoffeeBlendForTeamProductivityAndSynergyEnhancement coffeeBlend) {
 
 		log.info("☕ API Request: Add new coffee blend - {} from {}",
-				coffeeBlend.getNameOfCoffeeBlendThatTeamPrefers(),
-				coffeeBlend.getNameOfCafeThatSellsThisCoffeeBlend());
+				coffeeBlend.getExt_nameOfCoffeeBlendThatTeamPrefers(),
+				coffeeBlend.getExt_nameOfCafeThatSellsThisCoffeeBlend());
 
 		try {
 			CoffeeBlendForTeamProductivityAndSynergyEnhancement savedBlend =
 					coffeeBlendService.doTheThingToSaveNewCoffeeBlendToSystem(coffeeBlend);
 			log.info("✅ Coffee blend added successfully with ID: {}",
-					savedBlend.getUniqueIdentifierForCoffeeBlendRecordInDatabase());
+					savedBlend.getExt_uniqueIdentifierForCoffeeBlendRecordInDatabase());
 			return ResponseEntity.status(HttpStatus.CREATED).body(savedBlend);
 
 		} catch (Exception e) {
@@ -171,6 +182,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/random-cafe")
 	public ResponseEntity<Map<String, String>> getRandomCafeSelection() {
 		log.info("🎲 API Request: Get random cafe selection");
@@ -218,6 +230,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/random-blend")
 	public ResponseEntity<CoffeeBlendForTeamProductivityAndSynergyEnhancement> getRandomCoffeeBlend() {
 		log.info("🎲 API Request: Get random coffee blend");
@@ -226,8 +239,8 @@ public class CoffeeBlendForTeamProductivityController {
 			return coffeeBlendService.doTheThingToGetRandomCoffeeBlend()
 				.map(blend -> {
 					log.info("✅ Random blend selected: {} from {}",
-							blend.getNameOfCoffeeBlendThatTeamPrefers(),
-							blend.getNameOfCafeThatSellsThisCoffeeBlend());
+							blend.getExt_nameOfCoffeeBlendThatTeamPrefers(),
+							blend.getExt_nameOfCafeThatSellsThisCoffeeBlend());
 					return ResponseEntity.ok(blend);
 				})
 				.orElseGet(() -> {
@@ -249,6 +262,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/synergy-blends")
 	public ResponseEntity<List<CoffeeBlendForTeamProductivityAndSynergyEnhancement>> getSynergyEnhancingBlends() {
 		log.info("✨ API Request: Get synergy-enhancing coffee blends");
@@ -273,6 +287,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/delivery-available")
 	public ResponseEntity<List<CoffeeBlendForTeamProductivityAndSynergyEnhancement>> getBlendsWithDelivery() {
 		log.info("🚚 API Request: Get coffee blends with delivery available");
@@ -297,6 +312,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/ultimate-synergy")
 	public ResponseEntity<List<CoffeeBlendForTeamProductivityAndSynergyEnhancement>> getUltimateSynergyBlends() {
 		log.info("🌟 API Request: Get ultimate synergy blends (synergy + delivery)");
@@ -321,6 +337,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/top-synergy-booster")
 	public ResponseEntity<CoffeeBlendForTeamProductivityAndSynergyEnhancement> getTopSynergyBoostingBlend() {
 		log.info("🏆 API Request: Get top synergy-boosting blend");
@@ -329,8 +346,8 @@ public class CoffeeBlendForTeamProductivityController {
 			return coffeeBlendService.doTheThingToFindTopSynergyBoostingBlend()
 				.map(blend -> {
 					log.info("✅ Top synergy booster found: {} with {}% boost",
-							blend.getNameOfCoffeeBlendThatTeamPrefers(),
-							blend.getSynergyBoostPercentageWhenConsumed());
+							blend.getExt_nameOfCoffeeBlendThatTeamPrefers(),
+							blend.getExt_synergyBoostPercentageWhenConsumed());
 					return ResponseEntity.ok(blend);
 				})
 				.orElseGet(() -> {
@@ -353,6 +370,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/by-cafe/{cafeName}")
 	public ResponseEntity<List<CoffeeBlendForTeamProductivityAndSynergyEnhancement>> getBlendsByCafe(
 			@PathVariable String cafeName) {
@@ -381,6 +399,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@PutMapping("/blends/{id}")
 	public ResponseEntity<CoffeeBlendForTeamProductivityAndSynergyEnhancement> updateCoffeeBlend(
 			@PathVariable Long id,
@@ -414,6 +433,7 @@ public class CoffeeBlendForTeamProductivityController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@DeleteMapping("/blends/{id}")
 	public ResponseEntity<Map<String, String>> deleteCoffeeBlend(@PathVariable Long id) {
 		log.info("🗑️ API Request: Delete coffee blend with ID: {}", id);

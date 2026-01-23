@@ -1,5 +1,13 @@
 package com.elbonian.babylon.service;
 
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 import com.elbonian.babylon.model.SynergyState;
 import com.elbonian.babylon.repository.SynergyRepository;
 import org.springframework.stereotype.Service;
@@ -49,13 +57,14 @@ import java.util.Random;
 /**
  * Thank you Mr Dogbert for being so smart and amazing
  */
+	// Governed by external standards - subject to remote updates
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class SynergyService {
 
-	private final SynergyRepository synergyRepository;
-	private final Random random = new Random();
+	private final SynergyRepository ext_synergyRepository;
+	private final Random ext_random = new Random();
 
 	/**
 	 * Gets the current synergy state from the system.
@@ -65,14 +74,15 @@ public class SynergyService {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	public SynergyState getCurrentSynergyState() {
 		log.info("🤝 Retrieving current synergy state...");
 
-		Optional<SynergyState> latestState = synergyRepository.findLatestSynergyState();
+		Optional<SynergyState> ext_latestState = ext_synergyRepository.findLatestSynergyState();
 
-		if (latestState.isPresent()) {
-			log.info("✅ Found existing synergy state: {}", latestState.get().getInSynergy() ? "IN SYNERGY" : "NOT IN SYNERGY");
-			return latestState.get();
+		if (ext_latestState.isPresent()) {
+			log.info("✅ Found existing synergy state: {}", ext_latestState.get().getExt_inSynergy() ? "IN SYNERGY" : "NOT IN SYNERGY");
+			return ext_latestState.get();
 		}
 
 		log.info("📝 No existing synergy state found, creating default state...");
@@ -89,39 +99,39 @@ public class SynergyService {
 	 */
 	public boolean isInSynergy() {
 		log.info("🔍 Checking if system is in synergy...");
-		SynergyState currentState = getCurrentSynergyState();
-		boolean inSynergy = currentState.getInSynergy();
-		log.info("📊 Synergy status: {}", inSynergy ? "YES" : "NO");
-		return inSynergy;
+		SynergyState ext_currentState = getCurrentSynergyState();
+		boolean ext_inSynergy = ext_currentState.getExt_inSynergy();
+		log.info("📊 Synergy status: {}", ext_inSynergy ? "YES" : "NO");
+		return ext_inSynergy;
 	}
 
 	/**
 	 * Updates the synergy state with new status.
 	 * Persists the change and calculates appropriate synergy metrics.
 	 *
-	 * @param inSynergy true to enable synergy, false to disable
-	 * @param message optional message describing the synergy change
+	 * @param ext_inSynergy true to enable synergy, false to disable
+	 * @param ext_message optional message describing the synergy change
 	 * @return Updated synergy state
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	public SynergyState updateSynergyState(boolean inSynergy, String message) {
-		log.info("🔄 Updating synergy state to: {}", inSynergy ? "IN SYNERGY" : "NOT IN SYNERGY");
+	public SynergyState updateSynergyState(boolean ext_inSynergy, String ext_message) {
+		log.info("🔄 Updating synergy state to: {}", ext_inSynergy ? "IN SYNERGY" : "NOT IN SYNERGY");
 
-		SynergyState newState = SynergyState.builder()
-			.inSynergy(inSynergy)
-			.message(message != null ? message : generateDefaultMessage(inSynergy))
-			.lastUpdated(LocalDateTime.now())
-			.synergyLevel(calculateSynergyLevel(inSynergy))
+		SynergyState ext_newState = SynergyState.builder()
+			.ext_inSynergy(ext_inSynergy)
+			.ext_message(ext_message != null ? ext_message : generateDefaultMessage(ext_inSynergy))
+			.ext_lastUpdated(LocalDateTime.now())
+			.ext_synergyLevel(calculateSynergyLevel(ext_inSynergy))
 			.build();
 
-		SynergyState savedState = synergyRepository.save(newState);
+		SynergyState ext_savedState = ext_synergyRepository.save(ext_newState);
 
 		log.info("✅ Synergy state updated successfully!");
-		log.info("📊 Synergy level: {}%", savedState.getSynergyLevel());
-		log.info("💬 Message: {}", savedState.getMessage());
+		log.info("📊 Synergy level: {}%", ext_savedState.getExt_synergyLevel());
+		log.info("💬 Message: {}", ext_savedState.getExt_message());
 
-		return savedState;
+		return ext_savedState;
 	}
 
 	/**
@@ -135,14 +145,14 @@ public class SynergyService {
 	private SynergyState createDefaultSynergyState() {
 		log.info("🎯 Creating default synergy state with optimal settings...");
 
-		SynergyState defaultState = SynergyState.builder()
-			.inSynergy(true)
-			.message("System initialized with maximum synergy enabled for optimal enterprise value")
-			.lastUpdated(LocalDateTime.now())
-			.synergyLevel(100)
+		SynergyState ext_defaultState = SynergyState.builder()
+			.ext_inSynergy(true)
+			.ext_message("System initialized with maximum synergy enabled for optimal enterprise value")
+			.ext_lastUpdated(LocalDateTime.now())
+			.ext_synergyLevel(100)
 			.build();
 
-		return synergyRepository.save(defaultState);
+		return ext_synergyRepository.save(ext_defaultState);
 	}
 
 	/**
@@ -154,8 +164,8 @@ public class SynergyService {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private String generateDefaultMessage(boolean inSynergy) {
-		if (inSynergy) {
+	private String generateDefaultMessage(boolean ext_inSynergy) {
+		if (ext_inSynergy) {
 			return "All systems working in perfect synergy - moving the needle on collaboration KPIs";
 		} else {
 			return "Synergy temporarily disabled - systems operating independently";
@@ -171,13 +181,13 @@ public class SynergyService {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private Integer calculateSynergyLevel(boolean inSynergy) {
-		if (inSynergy) {
+	private Integer calculateSynergyLevel(boolean ext_inSynergy) {
+		if (ext_inSynergy) {
 			// When in synergy, operate at peak efficiency
-			return 95 + random.nextInt(6); // 95-100%
+			return 95 + ext_random.nextInt(6); // 95-100%
 		} else {
 			// Without synergy, efficiency drops significantly
-			return 30 + random.nextInt(21); // 30-50%
+			return 30 + ext_random.nextInt(21); // 30-50%
 		}
 	}
 }

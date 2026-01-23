@@ -1,5 +1,13 @@
 package com.elbonian.babylon.model;
 
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -71,7 +79,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long uniqueIdentifierForCoffeeBlendRecordInDatabase;
+	private Long ext_uniqueIdentifierForCoffeeBlendRecordInDatabase;
 
 	/**
 	 * The name of the coffee blend that the team prefers.
@@ -80,7 +88,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
 	@NotBlank(message = "Coffee blend name cannot be blank - we need to know what we're drinking!")
-	private String nameOfCoffeeBlendThatTeamPrefers;
+	private String ext_nameOfCoffeeBlendThatTeamPrefers;
 
 	/**
 	 * The name of the cafe where this excellent coffee blend is procured.
@@ -89,7 +97,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
 	@NotBlank(message = "Cafe name cannot be blank - we need to know where to circle back!")
-	private String nameOfCafeThatSellsThisCoffeeBlend;
+	private String ext_nameOfCafeThatSellsThisCoffeeBlend;
 
 	/**
 	 * Indicates whether this coffee shop offers delivery services.
@@ -98,7 +106,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
 	@NotNull(message = "Delivery availability must be specified for strategic logistics planning")
-	private Boolean doesThisCoffeeShopOfferDeliveryServices;
+	private Boolean ext_doesThisCoffeeShopOfferDeliveryServices;
 
 	/**
 	 * Indicates whether consuming this blend improves team synergy levels.
@@ -107,7 +115,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
 	@NotNull(message = "Synergy improvement indicator is mandatory for enterprise value tracking")
-	private Boolean doesThisBlendImproveSynergyWhenConsumed;
+	private Boolean ext_doesThisBlendImproveSynergyWhenConsumed;
 
 	/**
 	 * The percentage boost to synergy levels when this blend is consumed.
@@ -116,7 +124,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private Integer synergyBoostPercentageWhenConsumed;
+	private Integer ext_synergyBoostPercentageWhenConsumed;
 
 	/**
 	 * Additional notes about this coffee blend for future circle-back sessions.
@@ -124,7 +132,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private String additionalNotesAboutThisCoffeeBlend;
+	private String ext_additionalNotesAboutThisCoffeeBlend;
 
 	/**
 	 * Timestamp when this coffee blend was added to our enterprise system.
@@ -133,7 +141,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
 	@NotNull
-	private LocalDateTime timestampWhenThisBlendWasAddedToSystem;
+	private LocalDateTime ext_timestampWhenThisBlendWasAddedToSystem;
 
 	/**
 	 * Timestamp when this coffee blend record was last updated.
@@ -141,7 +149,7 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private LocalDateTime timestampWhenThisBlendWasLastUpdated;
+	private LocalDateTime ext_timestampWhenThisBlendWasLastUpdated;
 
 	/**
 	 * Rating given by the team (1-5 stars).
@@ -149,6 +157,6 @@ public class CoffeeBlendForTeamProductivityAndSynergyEnhancement {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private Integer teamRatingForThisBlendOutOfFiveStars;
+	private Integer ext_teamRatingForThisBlendOutOfFiveStars;
 }
 

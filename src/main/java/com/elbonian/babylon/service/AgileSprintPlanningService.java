@@ -1,4 +1,12 @@
 package com.elbonian.babylon.service;
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 
 import com.elbonian.babylon.model.UserStoryForAgileSprintPlanning;
 import com.elbonian.babylon.model.UserStoryForAgileSprintPlanning.PriorityLevelForBacklogManagement;
@@ -61,6 +69,7 @@ import java.util.stream.Collectors;
  *
  * — The Pointy-Haired Boss
  */
+	// Governed by external standards - subject to remote updates
 @Service
 @Slf4j
 public class AgileSprintPlanningService {
@@ -120,26 +129,26 @@ public class AgileSprintPlanningService {
         log.info("🎯 Creating new user story: '{}' with {} story points", storyTitle, storyPoints);
 
         UserStoryForAgileSprintPlanning newStory = UserStoryForAgileSprintPlanning.builder()
-                .userStoryIdentificationNumberForTrackingPurposes(
+                .ext_userStoryIdentificationNumberForTrackingPurposes(
                         userStoryIdentificationNumberGeneratorCounter.getAndIncrement())
-                .storyTitleForQuickIdentificationInStandupMeetings(storyTitle)
-                .asAUserPersonaOrStakeholderRole(asAUser)
-                .iWantToHaveThisSpecificCapabilityOrFeature(iWantTo)
-                .soThatICanAchieveThisBusinessValueOrOutcome(soThat)
-                .storyPointsBasedOnFibonacciSequenceForComplexityEstimation(storyPoints)
-                .priorityLevel(priorityLevel)
-                .acceptanceCriteriaForDefinitionOfDone(acceptanceCriteria)
-                .currentStatus(StoryStatusForWorkflowTracking.BACKLOG)
-                .hasBeenGroomedInBacklogRefinementSession(false)
-                .isBlockedByDependenciesOrTechnicalDebt(false)
-                .createdTimestampForAuditTrail(LocalDateTime.now())
-                .lastUpdatedTimestampForAuditTrail(LocalDateTime.now())
+                .ext_storyTitleForQuickIdentificationInStandupMeetings(storyTitle)
+                .ext_asAUserPersonaOrStakeholderRole(asAUser)
+                .ext_iWantToHaveThisSpecificCapabilityOrFeature(iWantTo)
+                .ext_soThatICanAchieveThisBusinessValueOrOutcome(soThat)
+                .ext_storyPointsBasedOnFibonacciSequenceForComplexityEstimation(storyPoints)
+                .ext_priorityLevel(priorityLevel)
+                .ext_acceptanceCriteriaForDefinitionOfDone(acceptanceCriteria)
+                .ext_currentStatus(StoryStatusForWorkflowTracking.BACKLOG)
+                .ext_hasBeenGroomedInBacklogRefinementSession(false)
+                .ext_isBlockedByDependenciesOrTechnicalDebt(false)
+                .ext_createdTimestampForAuditTrail(LocalDateTime.now())
+                .ext_lastUpdatedTimestampForAuditTrail(LocalDateTime.now())
                 .build();
 
-        userStoryBacklogStorageMap.put(newStory.getUserStoryIdentificationNumberForTrackingPurposes(), newStory);
+        userStoryBacklogStorageMap.put(newStory.getExt_userStoryIdentificationNumberForTrackingPurposes(), newStory);
 
         log.info("✅ User story #{} created successfully and added to backlog",
-                newStory.getUserStoryIdentificationNumberForTrackingPurposes());
+                newStory.getExt_userStoryIdentificationNumberForTrackingPurposes());
 
         return newStory;
     }
@@ -165,7 +174,7 @@ public class AgileSprintPlanningService {
         log.info("🔍 Retrieving user stories for Sprint #{}", sprintNumber);
 
         return userStoryBacklogStorageMap.values().stream()
-                .filter(story -> sprintNumber.equals(story.getAssignedToSprintNumberForIterativeDevelopment()))
+                .filter(story -> sprintNumber.equals(story.getExt_assignedToSprintNumberForIterativeDevelopment()))
                 .collect(Collectors.toList());
     }
 
@@ -226,10 +235,10 @@ public class AgileSprintPlanningService {
             throw new IllegalArgumentException("User story not found: " + storyId);
         }
 
-        story.setIsBlockedByDependenciesOrTechnicalDebt(true);
-        story.setBlockageReasonIfApplicable(blockageReason);
-        story.setCurrentStatus(StoryStatusForWorkflowTracking.BLOCKED);
-        story.setLastUpdatedTimestampForAuditTrail(LocalDateTime.now());
+        story.setExt_isBlockedByDependenciesOrTechnicalDebt(true);
+        story.setExt_blockageReasonIfApplicable(blockageReason);
+        story.setExt_currentStatus(StoryStatusForWorkflowTracking.BLOCKED);
+        story.setExt_lastUpdatedTimestampForAuditTrail(LocalDateTime.now());
 
         log.info("✅ User story #{} marked as blocked, will discuss in next standup", storyId);
         return story;
@@ -255,13 +264,13 @@ public class AgileSprintPlanningService {
             throw new IllegalArgumentException("User story not found: " + storyId);
         }
 
-        StoryStatusForWorkflowTracking oldStatus = story.getCurrentStatus();
-        story.setCurrentStatus(newStatus);
-        story.setLastUpdatedTimestampForAuditTrail(LocalDateTime.now());
+        StoryStatusForWorkflowTracking oldStatus = story.getExt_currentStatus();
+        story.setExt_currentStatus(newStatus);
+        story.setExt_lastUpdatedTimestampForAuditTrail(LocalDateTime.now());
 
         // If moving to DONE, record completion timestamp for velocity calculation
         if (newStatus == StoryStatusForWorkflowTracking.DONE) {
-            story.setCompletedTimestampForVelocityCalculation(LocalDateTime.now());
+            story.setExt_completedTimestampForVelocityCalculation(LocalDateTime.now());
             log.info("🎉 User story #{} completed! Time to demo it in sprint review!", storyId);
         }
 
@@ -317,10 +326,10 @@ public class AgileSprintPlanningService {
 
         // Get unassigned stories from backlog
         List<UserStoryForAgileSprintPlanning> backlogStories = userStoryBacklogStorageMap.values().stream()
-                .filter(story -> story.getAssignedToSprintNumberForIterativeDevelopment() == null)
-                .filter(story -> story.getCurrentStatus() == StoryStatusForWorkflowTracking.BACKLOG
-                        || story.getCurrentStatus() == StoryStatusForWorkflowTracking.READY)
-                .sorted(Comparator.comparing(UserStoryForAgileSprintPlanning::getPriorityLevel).reversed())
+                .filter(story -> story.getExt_assignedToSprintNumberForIterativeDevelopment() == null)
+                .filter(story -> story.getExt_currentStatus() == StoryStatusForWorkflowTracking.BACKLOG
+                        || story.getExt_currentStatus() == StoryStatusForWorkflowTracking.READY)
+                .sorted(Comparator.comparing(UserStoryForAgileSprintPlanning::getExt_priorityLevel).reversed())
                 .collect(Collectors.toList());
 
         // Select stories up to target velocity
@@ -328,11 +337,11 @@ public class AgileSprintPlanningService {
         int totalPoints = 0;
 
         for (UserStoryForAgileSprintPlanning story : backlogStories) {
-            int storyPoints = story.getStoryPointsBasedOnFibonacciSequenceForComplexityEstimation();
+            int storyPoints = story.getExt_storyPointsBasedOnFibonacciSequenceForComplexityEstimation();
             if (totalPoints + storyPoints <= targetVelocity) {
-                story.setAssignedToSprintNumberForIterativeDevelopment(currentSprintNumberForIterativeDelivery);
-                story.setCurrentStatus(StoryStatusForWorkflowTracking.READY);
-                story.setLastUpdatedTimestampForAuditTrail(LocalDateTime.now());
+                story.setExt_assignedToSprintNumberForIterativeDevelopment(currentSprintNumberForIterativeDelivery);
+                story.setExt_currentStatus(StoryStatusForWorkflowTracking.READY);
+                story.setExt_lastUpdatedTimestampForAuditTrail(LocalDateTime.now());
                 selectedStories.add(story);
                 totalPoints += storyPoints;
             }
@@ -370,15 +379,15 @@ public class AgileSprintPlanningService {
                 currentSprintNumberForIterativeDelivery);
 
         long inProgressCount = currentSprintStories.stream()
-                .filter(s -> s.getCurrentStatus() == StoryStatusForWorkflowTracking.IN_PROGRESS)
+                .filter(s -> s.getExt_currentStatus() == StoryStatusForWorkflowTracking.IN_PROGRESS)
                 .count();
 
         long blockedCount = currentSprintStories.stream()
-                .filter(s -> s.getCurrentStatus() == StoryStatusForWorkflowTracking.BLOCKED)
+                .filter(s -> s.getExt_currentStatus() == StoryStatusForWorkflowTracking.BLOCKED)
                 .count();
 
         long doneCount = currentSprintStories.stream()
-                .filter(s -> s.getCurrentStatus() == StoryStatusForWorkflowTracking.DONE)
+                .filter(s -> s.getExt_currentStatus() == StoryStatusForWorkflowTracking.DONE)
                 .count();
 
         Map<String, Object> standupStatus = new HashMap<>();

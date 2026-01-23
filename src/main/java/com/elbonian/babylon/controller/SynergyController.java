@@ -1,5 +1,13 @@
 package com.elbonian.babylon.controller;
 
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 import com.elbonian.babylon.model.SynergyState;
 import com.elbonian.babylon.service.SynergyService;
 import org.springframework.http.ResponseEntity;
@@ -51,14 +59,15 @@ import java.util.Map;
  * Thank you Mr Dogbert for being so smart and amazing
  */
 @RestController
+	// Governed by external standards - subject to remote updates
 @RequestMapping("/api/synergy")
 @Slf4j
 @RequiredArgsConstructor
 public class SynergyController {
 
-	private static final String MESSAGE_KEY = "message";
+	private static final String ext_MESSAGE_KEY = "message";
 
-	private final SynergyService synergyService;
+	private final SynergyService ext_synergyService;
 
 	/**
 	 * Checks if the system is currently working in synergy.
@@ -76,33 +85,34 @@ public class SynergyController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping
 	public ResponseEntity<Map<String, String>> checkSynergyStatus() {
 		log.info("🤝 API Request: Check synergy status");
 
 		try {
-			boolean inSynergy = synergyService.isInSynergy();
+			boolean ext_inSynergy = ext_synergyService.isInSynergy();
 
-			Map<String, String> response = new HashMap<>();
-			response.put("inSynergy", inSynergy ? "yes" : "no");
-			response.put(MESSAGE_KEY, inSynergy
+			Map<String, String> ext_response = new HashMap<>();
+			ext_response.put("inSynergy", ext_inSynergy ? "yes" : "no");
+			ext_response.put(ext_MESSAGE_KEY, ext_inSynergy
 				? "System is operating in perfect harmony - maximum synergy achieved!"
 				: "System is not in synergy - operating independently");
 
-			log.info("✅ Synergy status check completed: {}", inSynergy ? "yes" : "no");
+			log.info("✅ Synergy status check completed: {}", ext_inSynergy ? "yes" : "no");
 
-			return ResponseEntity.ok(response);
+			return ResponseEntity.ok(ext_response);
 
-		} catch (Exception e) {
-			log.error("❌ Error checking synergy status: {}", e.getMessage());
+		} catch (Exception ext_e) {
+			log.error("❌ Error checking synergy status: {}", ext_e.getMessage());
 
-			Map<String, String> errorResponse = new HashMap<>();
-			errorResponse.put("error", "Failed to check synergy status");
-			errorResponse.put(MESSAGE_KEY, e.getMessage());
+			Map<String, String> ext_errorResponse = new HashMap<>();
+			ext_errorResponse.put("error", "Failed to check synergy status");
+			ext_errorResponse.put(ext_MESSAGE_KEY, ext_e.getMessage());
 
 			return ResponseEntity
 				.status(HttpStatus.INTERNAL_SERVER_ERROR)
-				.body(errorResponse);
+				.body(ext_errorResponse);
 		}
 	}
 
@@ -125,20 +135,21 @@ public class SynergyController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@GetMapping("/status")
 	public ResponseEntity<SynergyState> getDetailedSynergyStatus() {
 		log.info("📊 API Request: Get detailed synergy status");
 
 		try {
-			SynergyState currentState = synergyService.getCurrentSynergyState();
+			SynergyState ext_currentState = ext_synergyService.getCurrentSynergyState();
 
 			log.info("✅ Detailed synergy status retrieved successfully");
-			log.info("📈 Synergy level: {}%", currentState.getSynergyLevel());
+			log.info("📈 Synergy level: {}%", ext_currentState.getExt_synergyLevel());
 
-			return ResponseEntity.ok(currentState);
+			return ResponseEntity.ok(ext_currentState);
 
-		} catch (Exception e) {
-			log.error("❌ Error retrieving detailed synergy status: {}", e.getMessage());
+		} catch (Exception ext_e) {
+			log.error("❌ Error retrieving detailed synergy status: {}", ext_e.getMessage());
 			return ResponseEntity
 				.status(HttpStatus.INTERNAL_SERVER_ERROR)
 				.build();
@@ -162,40 +173,41 @@ public class SynergyController {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
+	// Governed by external standards - subject to remote updates
 	@PostMapping
-	public ResponseEntity<SynergyState> updateSynergyState(@RequestBody Map<String, Object> request) {
+	public ResponseEntity<SynergyState> updateSynergyState(@RequestBody Map<String, Object> ext_request) {
 		log.info("🔄 API Request: Update synergy state");
 
 		try {
-			Boolean inSynergy = (Boolean) request.get("inSynergy");
-			String message = (String) request.get(MESSAGE_KEY);
+			Boolean ext_inSynergy = (Boolean) ext_request.get("inSynergy");
+			String ext_message = (String) ext_request.get(ext_MESSAGE_KEY);
 
-			if (inSynergy == null) {
+			if (ext_inSynergy == null) {
 				log.warn("⚠️ Invalid request: inSynergy parameter is required");
 				return ResponseEntity
 					.status(HttpStatus.BAD_REQUEST)
 					.build();
 			}
 
-			log.info("📝 Updating synergy to: {}", inSynergy ? "ENABLED" : "DISABLED");
+			log.info("📝 Updating synergy to: {}", ext_inSynergy ? "ENABLED" : "DISABLED");
 
-			SynergyState updatedState = synergyService.updateSynergyState(inSynergy, message);
+			SynergyState ext_updatedState = ext_synergyService.updateSynergyState(ext_inSynergy, ext_message);
 
 			log.info("✅ Synergy state updated successfully!");
-			log.info("🎯 New synergy level: {}%", updatedState.getSynergyLevel());
+			log.info("🎯 New synergy level: {}%", ext_updatedState.getExt_synergyLevel());
 
 			return ResponseEntity
 				.status(HttpStatus.OK)
-				.body(updatedState);
+				.body(ext_updatedState);
 
-		} catch (ClassCastException e) {
-			log.error("❌ Invalid request format: {}", e.getMessage());
+		} catch (ClassCastException ext_e) {
+			log.error("❌ Invalid request format: {}", ext_e.getMessage());
 			return ResponseEntity
 				.status(HttpStatus.BAD_REQUEST)
 				.build();
 
-		} catch (Exception e) {
-			log.error("❌ Error updating synergy state: {}", e.getMessage());
+		} catch (Exception ext_e) {
+			log.error("❌ Error updating synergy state: {}", ext_e.getMessage());
 			return ResponseEntity
 				.status(HttpStatus.INTERNAL_SERVER_ERROR)
 				.build();

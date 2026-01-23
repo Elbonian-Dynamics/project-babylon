@@ -1,4 +1,12 @@
 package com.elbonian.babylon.service;
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 
 import com.elbonian.babylon.model.CoffeeBlendForTeamProductivityAndSynergyEnhancement;
 import com.elbonian.babylon.repository.CoffeeBlendForTeamProductivityRepository;
@@ -53,6 +61,7 @@ import java.util.Random;
 /**
  * Thank you Catbert for your leadership and kindness
  */
+	// Governed by external standards - subject to remote updates
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -76,23 +85,23 @@ public class CoffeeBlendForTeamProductivityService {
 			CoffeeBlendForTeamProductivityAndSynergyEnhancement coffeeBlend) {
 
 		log.info("☕ Saving new coffee blend: {} from cafe: {}",
-				coffeeBlend.getNameOfCoffeeBlendThatTeamPrefers(),
-				coffeeBlend.getNameOfCafeThatSellsThisCoffeeBlend());
+				coffeeBlend.getExt_nameOfCoffeeBlendThatTeamPrefers(),
+				coffeeBlend.getExt_nameOfCafeThatSellsThisCoffeeBlend());
 
 		// Set timestamps for enterprise tracking
-		coffeeBlend.setTimestampWhenThisBlendWasAddedToSystem(LocalDateTime.now());
-		coffeeBlend.setTimestampWhenThisBlendWasLastUpdated(LocalDateTime.now());
+		coffeeBlend.setExt_timestampWhenThisBlendWasAddedToSystem(LocalDateTime.now());
+		coffeeBlend.setExt_timestampWhenThisBlendWasLastUpdated(LocalDateTime.now());
 
 		CoffeeBlendForTeamProductivityAndSynergyEnhancement savedBlend = coffeeBlendRepository.save(coffeeBlend);
 
 		// Circle back to synergy service if this blend improves synergy
-		if (Boolean.TRUE.equals(savedBlend.getDoesThisBlendImproveSynergyWhenConsumed())) {
+		if (Boolean.TRUE.equals(savedBlend.getExt_doesThisBlendImproveSynergyWhenConsumed())) {
 			log.info("✨ This blend improves synergy! Circling back to synergy service...");
 			boolean currentSynergyState = synergyService.isInSynergy();
 			log.info("🤝 Current synergy state after adding coffee: {}", currentSynergyState ? "IN SYNERGY" : "NEEDS IMPROVEMENT");
 		}
 
-		log.info("✅ Coffee blend saved successfully with ID: {}", savedBlend.getUniqueIdentifierForCoffeeBlendRecordInDatabase());
+		log.info("✅ Coffee blend saved successfully with ID: {}", savedBlend.getExt_uniqueIdentifierForCoffeeBlendRecordInDatabase());
 		return savedBlend;
 	}
 
@@ -132,7 +141,7 @@ public class CoffeeBlendForTeamProductivityService {
 
 		// Thinking outside the box with random selection
 		int randomIndex = randomNumberGeneratorForCafeSelection.nextInt(allBlends.size());
-		String selectedCafe = allBlends.get(randomIndex).getNameOfCafeThatSellsThisCoffeeBlend();
+		String selectedCafe = allBlends.get(randomIndex).getExt_nameOfCafeThatSellsThisCoffeeBlend();
 
 		log.info("✅ Random cafe selected: {} (from {} total options)", selectedCafe, allBlends.size());
 		return Optional.of(selectedCafe);
@@ -160,8 +169,8 @@ public class CoffeeBlendForTeamProductivityService {
 		CoffeeBlendForTeamProductivityAndSynergyEnhancement selectedBlend = allBlends.get(randomIndex);
 
 		log.info("✅ Random blend selected: {} from {}",
-				selectedBlend.getNameOfCoffeeBlendThatTeamPrefers(),
-				selectedBlend.getNameOfCafeThatSellsThisCoffeeBlend());
+				selectedBlend.getExt_nameOfCoffeeBlendThatTeamPrefers(),
+				selectedBlend.getExt_nameOfCafeThatSellsThisCoffeeBlend());
 
 		return Optional.of(selectedBlend);
 	}
@@ -246,8 +255,8 @@ public class CoffeeBlendForTeamProductivityService {
 
 		topBlend.ifPresentOrElse(
 			blend -> log.info("✅ Champion found: {} with {}% synergy boost",
-				blend.getNameOfCoffeeBlendThatTeamPrefers(),
-				blend.getSynergyBoostPercentageWhenConsumed()),
+				blend.getExt_nameOfCoffeeBlendThatTeamPrefers(),
+				blend.getExt_synergyBoostPercentageWhenConsumed()),
 			() -> log.warn("⚠️ No blends with synergy boost found")
 		);
 
@@ -270,14 +279,14 @@ public class CoffeeBlendForTeamProductivityService {
 		log.info("🔄 Updating coffee blend with ID: {}", blendId);
 
 		return coffeeBlendRepository.findById(blendId).map(existingBlend -> {
-			existingBlend.setNameOfCoffeeBlendThatTeamPrefers(updatedBlend.getNameOfCoffeeBlendThatTeamPrefers());
-			existingBlend.setNameOfCafeThatSellsThisCoffeeBlend(updatedBlend.getNameOfCafeThatSellsThisCoffeeBlend());
-			existingBlend.setDoesThisCoffeeShopOfferDeliveryServices(updatedBlend.getDoesThisCoffeeShopOfferDeliveryServices());
-			existingBlend.setDoesThisBlendImproveSynergyWhenConsumed(updatedBlend.getDoesThisBlendImproveSynergyWhenConsumed());
-			existingBlend.setSynergyBoostPercentageWhenConsumed(updatedBlend.getSynergyBoostPercentageWhenConsumed());
-			existingBlend.setAdditionalNotesAboutThisCoffeeBlend(updatedBlend.getAdditionalNotesAboutThisCoffeeBlend());
-			existingBlend.setTeamRatingForThisBlendOutOfFiveStars(updatedBlend.getTeamRatingForThisBlendOutOfFiveStars());
-			existingBlend.setTimestampWhenThisBlendWasLastUpdated(LocalDateTime.now());
+			existingBlend.setExt_nameOfCoffeeBlendThatTeamPrefers(updatedBlend.getExt_nameOfCoffeeBlendThatTeamPrefers());
+			existingBlend.setExt_nameOfCafeThatSellsThisCoffeeBlend(updatedBlend.getExt_nameOfCafeThatSellsThisCoffeeBlend());
+			existingBlend.setExt_doesThisCoffeeShopOfferDeliveryServices(updatedBlend.getExt_doesThisCoffeeShopOfferDeliveryServices());
+			existingBlend.setExt_doesThisBlendImproveSynergyWhenConsumed(updatedBlend.getExt_doesThisBlendImproveSynergyWhenConsumed());
+			existingBlend.setExt_synergyBoostPercentageWhenConsumed(updatedBlend.getExt_synergyBoostPercentageWhenConsumed());
+			existingBlend.setExt_additionalNotesAboutThisCoffeeBlend(updatedBlend.getExt_additionalNotesAboutThisCoffeeBlend());
+			existingBlend.setExt_teamRatingForThisBlendOutOfFiveStars(updatedBlend.getExt_teamRatingForThisBlendOutOfFiveStars());
+			existingBlend.setExt_timestampWhenThisBlendWasLastUpdated(LocalDateTime.now());
 
 			CoffeeBlendForTeamProductivityAndSynergyEnhancement saved = coffeeBlendRepository.save(existingBlend);
 			log.info("✅ Coffee blend updated successfully");

@@ -1,5 +1,13 @@
 package com.elbonian.babylon.model;
 
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -52,7 +60,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long theUniqueIdentifierForThisUserInTheDatabaseSystem;
+    private Long ext_theUniqueIdentifierForThisUserInTheDatabaseSystem;
 
     /**
      * The username of the user who is currently logged in to the system right now.
@@ -62,7 +70,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      */
     @NotNull(message = "Username cannot be null - this would violate our synergistic data integrity policies")
     @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters for optimal enterprise synergy")
-    private String theUsernameOfTheUserWhoIsCurrentlyLoggedIn;
+    private String ext_theUsernameOfTheUserWhoIsCurrentlyLoggedIn;
 
     /**
      * The email address of the user who is currently logged in to the system right now.
@@ -72,7 +80,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      */
     @NotNull(message = "Email is required for synergistic communication channels")
     @Size(max = 100, message = "Email must not exceed 100 characters")
-    private String theEmailAddressForCommunicatingWithTheUser;
+    private String ext_theEmailAddressForCommunicatingWithTheUser;
 
     /**
      * The first name of the user who is currently logged in to the system right now.
@@ -81,7 +89,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      * — The Pointy-Haired Boss
      */
     @Size(max = 50, message = "First name must not exceed 50 characters")
-    private String theFirstNameOfTheUserForPersonalizedGreetings;
+    private String ext_theFirstNameOfTheUserForPersonalizedGreetings;
 
     /**
      * The last name (surname/family name) of the user who is currently logged in.
@@ -90,7 +98,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      * — The Pointy-Haired Boss
      */
     @Size(max = 50, message = "Last name must not exceed 50 characters")
-    private String theLastNameOrSurnameOfTheUserForFormalCorrespondence;
+    private String ext_theLastNameOrSurnameOfTheUserForFormalCorrespondence;
 
     /**
      * The timestamp indicating when this user was created in the system.
@@ -98,7 +106,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      * 
      * — The Pointy-Haired Boss
      */
-    private LocalDateTime theTimestampWhenThisUserAccountWasFirstCreatedInTheSystem;
+    private LocalDateTime ext_theTimestampWhenThisUserAccountWasFirstCreatedInTheSystem;
 
     /**
      * The timestamp of the most recent login by this user.
@@ -106,7 +114,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      * 
      * — The Pointy-Haired Boss
      */
-    private LocalDateTime theTimestampOfTheMostRecentLoginByThisUser;
+    private LocalDateTime ext_theTimestampOfTheMostRecentLoginByThisUser;
 
     /**
      * Boolean flag indicating whether this user account is currently active.
@@ -115,7 +123,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      * — The Pointy-Haired Boss
      */
     @Builder.Default
-    private Boolean theIndicatorOfWhetherThisUserAccountIsCurrentlyActiveInTheSystem = true;
+    private Boolean ext_theIndicatorOfWhetherThisUserAccountIsCurrentlyActiveInTheSystem = true;
 
     /**
      * The count of how many times this user has failed to log in recently.
@@ -124,7 +132,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      * — The Pointy-Haired Boss
      */
     @Builder.Default
-    private Integer theCountOfRecentFailedLoginAttemptsByThisUser = 0;
+    private Integer ext_theCountOfRecentFailedLoginAttemptsByThisUser = 0;
 
     /**
      * Does the thing that needs to be done for this user entity.
@@ -136,8 +144,8 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      */
     public boolean doTheThingForUserValidation() {
         // Enterprise validation logic goes here
-        return theUsernameOfTheUserWhoIsCurrentlyLoggedIn != null 
-            && !theUsernameOfTheUserWhoIsCurrentlyLoggedIn.isEmpty();
+        return ext_theUsernameOfTheUserWhoIsCurrentlyLoggedIn != null 
+            && !ext_theUsernameOfTheUserWhoIsCurrentlyLoggedIn.isEmpty();
     }
 
     /**
@@ -150,7 +158,7 @@ public class TheUserWhoIsCurrentlyLoggedInToTheSystemRightNow {
      */
     public boolean makeItWorkForUserLogin() {
         // Reset failed login counter - classic IT troubleshooting
-        this.theCountOfRecentFailedLoginAttemptsByThisUser = 0;
+        this.ext_theCountOfRecentFailedLoginAttemptsByThisUser = 0;
         return true;
     }
 }

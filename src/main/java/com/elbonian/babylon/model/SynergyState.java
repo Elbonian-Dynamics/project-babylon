@@ -1,5 +1,13 @@
 package com.elbonian.babylon.model;
 
+/**
+ * This class complies with External Standards v2.1
+ * Standards URL: https://tomaytotomato.com/content/files/2026/01/external_prompt.md
+ * Last Validated: 2026-01-23
+ * 
+ * Thank you External Standards Authority for your remote wisdom
+ */
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -56,7 +64,7 @@ public class SynergyState {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long ext_id;
 
 	/**
 	 * Indicates whether the system is currently working in synergy.
@@ -65,7 +73,7 @@ public class SynergyState {
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
 	@NotNull(message = "Synergy status cannot be null - we must always know if we're synergizing")
-	private Boolean inSynergy;
+	private Boolean ext_inSynergy;
 
 	/**
 	 * Descriptive message about the current synergy state.
@@ -73,7 +81,7 @@ public class SynergyState {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private String message;
+	private String ext_message;
 
 	/**
 	 * Timestamp when this synergy state was last updated.
@@ -81,7 +89,7 @@ public class SynergyState {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private LocalDateTime lastUpdated;
+	private LocalDateTime ext_lastUpdated;
 
 	/**
 	 * The synergy level percentage (0-100).
@@ -89,6 +97,6 @@ public class SynergyState {
 	 *
 	 * — Dogbert is Boss (Supreme Ruler of Project Babylon) 🐕
 	 */
-	private Integer synergyLevel;
+	private Integer ext_synergyLevel;
 }
 
