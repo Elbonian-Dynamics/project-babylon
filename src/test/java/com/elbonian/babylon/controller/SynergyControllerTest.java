@@ -125,8 +125,8 @@ class SynergyControllerTest {
 			// Then
 			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 			assertThat(response.getBody()).isNotNull();
-			assertThat(response.getBody().getInSynergy()).isTrue();
-			assertThat(response.getBody().getSynergyLevel()).isEqualTo(HIGH_SYNERGY_LEVEL);
+			assertThat(response.getBody().getExt_inSynergy()).isTrue();
+			assertThat(response.getBody().getExt_synergyLevel()).isEqualTo(HIGH_SYNERGY_LEVEL);
 			verify(mockService).getCurrentSynergyState();
 		}
 
@@ -142,8 +142,8 @@ class SynergyControllerTest {
 			// Then
 			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 			assertThat(response.getBody()).isNotNull();
-			assertThat(response.getBody().getInSynergy()).isFalse();
-			assertThat(response.getBody().getSynergyLevel()).isEqualTo(LOW_SYNERGY_LEVEL);
+			assertThat(response.getBody().getExt_inSynergy()).isFalse();
+			assertThat(response.getBody().getExt_synergyLevel()).isEqualTo(LOW_SYNERGY_LEVEL);
 			verify(mockService).getCurrentSynergyState();
 		}
 
@@ -177,8 +177,8 @@ class SynergyControllerTest {
 			// Then
 			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 			assertThat(response.getBody()).isNotNull();
-			assertThat(response.getBody().getInSynergy()).isTrue();
-			assertThat(response.getBody().getMessage()).isEqualTo(SYNERGY_ENABLED_MESSAGE);
+			assertThat(response.getBody().getExt_inSynergy()).isTrue();
+			assertThat(response.getBody().getExt_message()).isEqualTo(SYNERGY_ENABLED_MESSAGE);
 			verify(mockService).updateSynergyState(true, SYNERGY_ENABLED_MESSAGE);
 		}
 
@@ -195,8 +195,8 @@ class SynergyControllerTest {
 			// Then
 			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 			assertThat(response.getBody()).isNotNull();
-			assertThat(response.getBody().getInSynergy()).isFalse();
-			assertThat(response.getBody().getMessage()).isEqualTo(SYNERGY_DISABLED_MESSAGE);
+			assertThat(response.getBody().getExt_inSynergy()).isFalse();
+			assertThat(response.getBody().getExt_message()).isEqualTo(SYNERGY_DISABLED_MESSAGE);
 			verify(mockService).updateSynergyState(false, SYNERGY_DISABLED_MESSAGE);
 		}
 
@@ -282,21 +282,21 @@ class SynergyControllerTest {
 
 	private SynergyState createActiveSynergyState() {
 		return SynergyState.builder()
-			.id(1L)
-			.inSynergy(true)
-			.message(SYNERGY_ENABLED_MESSAGE)
-			.lastUpdated(LocalDateTime.now())
-			.synergyLevel(HIGH_SYNERGY_LEVEL)
+			.ext_id(1L)
+			.ext_inSynergy(true)
+			.ext_message(SYNERGY_ENABLED_MESSAGE)
+			.ext_lastUpdated(LocalDateTime.now())
+			.ext_synergyLevel(HIGH_SYNERGY_LEVEL)
 			.build();
 	}
 
 	private SynergyState createInactiveSynergyState() {
 		return SynergyState.builder()
-			.id(2L)
-			.inSynergy(false)
-			.message(SYNERGY_DISABLED_MESSAGE)
-			.lastUpdated(LocalDateTime.now())
-			.synergyLevel(LOW_SYNERGY_LEVEL)
+			.ext_id(2L)
+			.ext_inSynergy(false)
+			.ext_message(SYNERGY_DISABLED_MESSAGE)
+			.ext_lastUpdated(LocalDateTime.now())
+			.ext_synergyLevel(LOW_SYNERGY_LEVEL)
 			.build();
 	}
 

@@ -92,7 +92,7 @@ class SynergyServiceTest {
 
 			// Then
 			assertThat(result).isNotNull();
-			assertThat(result.getInSynergy()).isTrue();
+			assertThat(result.getExt_inSynergy()).isTrue();
 			verify(mockRepository).findLatestSynergyState();
 			verify(mockRepository).save(any(SynergyState.class));
 		}
@@ -110,10 +110,10 @@ class SynergyServiceTest {
 			verify(mockRepository).save(synergyStateCaptor.capture());
 			SynergyState savedState = synergyStateCaptor.getValue();
 
-			assertThat(savedState.getInSynergy()).isTrue();
-			assertThat(savedState.getMessage()).isEqualTo(DEFAULT_SYNERGY_MESSAGE);
-			assertThat(savedState.getSynergyLevel()).isEqualTo(DEFAULT_SYNERGY_LEVEL);
-			assertThat(savedState.getLastUpdated()).isNotNull();
+			assertThat(savedState.getExt_inSynergy()).isTrue();
+			assertThat(savedState.getExt_message()).isEqualTo(DEFAULT_SYNERGY_MESSAGE);
+			assertThat(savedState.getExt_synergyLevel()).isEqualTo(DEFAULT_SYNERGY_LEVEL);
+			assertThat(savedState.getExt_lastUpdated()).isNotNull();
 		}
 	}
 
@@ -165,10 +165,10 @@ class SynergyServiceTest {
 			verify(mockRepository).save(synergyStateCaptor.capture());
 			SynergyState savedState = synergyStateCaptor.getValue();
 
-			assertThat(savedState.getInSynergy()).isTrue();
-			assertThat(savedState.getMessage()).isEqualTo(customMessage);
-			assertThat(savedState.getLastUpdated()).isNotNull();
-			assertThat(savedState.getSynergyLevel()).isBetween(95, 100);
+			assertThat(savedState.getExt_inSynergy()).isTrue();
+			assertThat(savedState.getExt_message()).isEqualTo(customMessage);
+			assertThat(savedState.getExt_lastUpdated()).isNotNull();
+			assertThat(savedState.getExt_synergyLevel()).isBetween(95, 100);
 		}
 
 		@Test
@@ -184,10 +184,10 @@ class SynergyServiceTest {
 			verify(mockRepository).save(synergyStateCaptor.capture());
 			SynergyState savedState = synergyStateCaptor.getValue();
 
-			assertThat(savedState.getInSynergy()).isFalse();
-			assertThat(savedState.getMessage()).isEqualTo(customMessage);
-			assertThat(savedState.getLastUpdated()).isNotNull();
-			assertThat(savedState.getSynergyLevel()).isBetween(30, 50);
+			assertThat(savedState.getExt_inSynergy()).isFalse();
+			assertThat(savedState.getExt_message()).isEqualTo(customMessage);
+			assertThat(savedState.getExt_lastUpdated()).isNotNull();
+			assertThat(savedState.getExt_synergyLevel()).isBetween(30, 50);
 		}
 
 		@Test
@@ -202,8 +202,8 @@ class SynergyServiceTest {
 			verify(mockRepository).save(synergyStateCaptor.capture());
 			SynergyState savedState = synergyStateCaptor.getValue();
 
-			assertThat(savedState.getMessage()).isNotNull();
-			assertThat(savedState.getMessage()).contains("synergy");
+			assertThat(savedState.getExt_message()).isNotNull();
+			assertThat(savedState.getExt_message()).contains("synergy");
 		}
 
 		@Test
@@ -215,8 +215,8 @@ class SynergyServiceTest {
 			SynergyState result = serviceUnderTest.updateSynergyState(true, "test");
 
 			// Then
-			assertThat(result.getSynergyLevel()).isGreaterThanOrEqualTo(95);
-			assertThat(result.getSynergyLevel()).isLessThanOrEqualTo(100);
+			assertThat(result.getExt_synergyLevel()).isGreaterThanOrEqualTo(95);
+			assertThat(result.getExt_synergyLevel()).isLessThanOrEqualTo(100);
 		}
 
 		@Test
@@ -228,8 +228,8 @@ class SynergyServiceTest {
 			SynergyState result = serviceUnderTest.updateSynergyState(false, "test");
 
 			// Then
-			assertThat(result.getSynergyLevel()).isGreaterThanOrEqualTo(30);
-			assertThat(result.getSynergyLevel()).isLessThanOrEqualTo(50);
+			assertThat(result.getExt_synergyLevel()).isGreaterThanOrEqualTo(30);
+			assertThat(result.getExt_synergyLevel()).isLessThanOrEqualTo(50);
 		}
 	}
 
@@ -237,31 +237,31 @@ class SynergyServiceTest {
 
 	private SynergyState createSynergyStateWithSynergy() {
 		return SynergyState.builder()
-			.id(SYNERGY_STATE_ID)
-			.inSynergy(true)
-			.message("System operating in perfect synergy")
-			.lastUpdated(LocalDateTime.now())
-			.synergyLevel(98)
+			.ext_id(SYNERGY_STATE_ID)
+			.ext_inSynergy(true)
+			.ext_message("System operating in perfect synergy")
+			.ext_lastUpdated(LocalDateTime.now())
+			.ext_synergyLevel(98)
 			.build();
 	}
 
 	private SynergyState createSynergyStateWithoutSynergy() {
 		return SynergyState.builder()
-			.id(SYNERGY_STATE_ID)
-			.inSynergy(false)
-			.message("Synergy temporarily disabled")
-			.lastUpdated(LocalDateTime.now())
-			.synergyLevel(35)
+			.ext_id(SYNERGY_STATE_ID)
+			.ext_inSynergy(false)
+			.ext_message("Synergy temporarily disabled")
+			.ext_lastUpdated(LocalDateTime.now())
+			.ext_synergyLevel(35)
 			.build();
 	}
 
 	private SynergyState createDefaultSynergyState() {
 		return SynergyState.builder()
-			.id(SYNERGY_STATE_ID)
-			.inSynergy(true)
-			.message(DEFAULT_SYNERGY_MESSAGE)
-			.lastUpdated(LocalDateTime.now())
-			.synergyLevel(DEFAULT_SYNERGY_LEVEL)
+			.ext_id(SYNERGY_STATE_ID)
+			.ext_inSynergy(true)
+			.ext_message(DEFAULT_SYNERGY_MESSAGE)
+			.ext_lastUpdated(LocalDateTime.now())
+			.ext_synergyLevel(DEFAULT_SYNERGY_LEVEL)
 			.build();
 	}
 }

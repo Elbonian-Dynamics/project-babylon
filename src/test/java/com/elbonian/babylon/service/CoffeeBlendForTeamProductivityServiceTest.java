@@ -59,23 +59,23 @@ class CoffeeBlendForTeamProductivityServiceTest {
 	@BeforeEach
 	void setUp() {
 		synergyBlend = CoffeeBlendForTeamProductivityAndSynergyEnhancement.builder()
-				.uniqueIdentifierForCoffeeBlendRecordInDatabase(1L)
-				.nameOfCoffeeBlendThatTeamPrefers("Synergy Supreme Blend")
-				.nameOfCafeThatSellsThisCoffeeBlend("Dilbert's Daily Grind")
-				.doesThisCoffeeShopOfferDeliveryServices(true)
-				.doesThisBlendImproveSynergyWhenConsumed(true)
-				.synergyBoostPercentageWhenConsumed(85)
-				.teamRatingForThisBlendOutOfFiveStars(5)
+				.ext_uniqueIdentifierForCoffeeBlendRecordInDatabase(1L)
+				.ext_nameOfCoffeeBlendThatTeamPrefers("Synergy Supreme Blend")
+				.ext_nameOfCafeThatSellsThisCoffeeBlend("Dilbert's Daily Grind")
+				.ext_doesThisCoffeeShopOfferDeliveryServices(true)
+				.ext_doesThisBlendImproveSynergyWhenConsumed(true)
+				.ext_synergyBoostPercentageWhenConsumed(85)
+				.ext_teamRatingForThisBlendOutOfFiveStars(5)
 				.build();
 
 		regularBlend = CoffeeBlendForTeamProductivityAndSynergyEnhancement.builder()
-				.uniqueIdentifierForCoffeeBlendRecordInDatabase(2L)
-				.nameOfCoffeeBlendThatTeamPrefers("Regular Dark Roast")
-				.nameOfCafeThatSellsThisCoffeeBlend("The Pointy-Haired Cafe")
-				.doesThisCoffeeShopOfferDeliveryServices(false)
-				.doesThisBlendImproveSynergyWhenConsumed(false)
-				.synergyBoostPercentageWhenConsumed(0)
-				.teamRatingForThisBlendOutOfFiveStars(3)
+				.ext_uniqueIdentifierForCoffeeBlendRecordInDatabase(2L)
+				.ext_nameOfCoffeeBlendThatTeamPrefers("Regular Dark Roast")
+				.ext_nameOfCafeThatSellsThisCoffeeBlend("The Pointy-Haired Cafe")
+				.ext_doesThisCoffeeShopOfferDeliveryServices(false)
+				.ext_doesThisBlendImproveSynergyWhenConsumed(false)
+				.ext_synergyBoostPercentageWhenConsumed(0)
+				.ext_teamRatingForThisBlendOutOfFiveStars(3)
 				.build();
 	}
 
@@ -132,7 +132,7 @@ class CoffeeBlendForTeamProductivityServiceTest {
 
 			// Then
 			assertNotNull(result);
-			assertEquals("Synergy Supreme Blend", result.getNameOfCoffeeBlendThatTeamPrefers());
+			assertEquals("Synergy Supreme Blend", result.getExt_nameOfCoffeeBlendThatTeamPrefers());
 			verify(coffeeBlendRepository).save(any(CoffeeBlendForTeamProductivityAndSynergyEnhancement.class));
 			verify(synergyService).isInSynergy(); // Circle back integration!
 		}
@@ -150,7 +150,7 @@ class CoffeeBlendForTeamProductivityServiceTest {
 
 			// Then
 			assertNotNull(result);
-			assertEquals("Regular Dark Roast", result.getNameOfCoffeeBlendThatTeamPrefers());
+			assertEquals("Regular Dark Roast", result.getExt_nameOfCoffeeBlendThatTeamPrefers());
 			verify(coffeeBlendRepository).save(any(CoffeeBlendForTeamProductivityAndSynergyEnhancement.class));
 			verify(synergyService, never()).isInSynergy(); // Should NOT circle back
 		}
@@ -174,7 +174,7 @@ class CoffeeBlendForTeamProductivityServiceTest {
 			// Then
 			assertNotNull(result);
 			assertEquals(1, result.size());
-			assertTrue(result.get(0).getDoesThisBlendImproveSynergyWhenConsumed());
+			assertTrue(result.get(0).getExt_doesThisBlendImproveSynergyWhenConsumed());
 			verify(coffeeBlendRepository).findAllCoffeeBlendsThatImproveSynergyLevels();
 		}
 	}
@@ -197,8 +197,8 @@ class CoffeeBlendForTeamProductivityServiceTest {
 			// Then
 			assertNotNull(result);
 			assertEquals(1, result.size());
-			assertTrue(result.get(0).getDoesThisBlendImproveSynergyWhenConsumed());
-			assertTrue(result.get(0).getDoesThisCoffeeShopOfferDeliveryServices());
+			assertTrue(result.get(0).getExt_doesThisBlendImproveSynergyWhenConsumed());
+			assertTrue(result.get(0).getExt_doesThisCoffeeShopOfferDeliveryServices());
 			verify(coffeeBlendRepository).findBlendsWithSynergyAndDelivery(true, true);
 		}
 	}
@@ -219,7 +219,7 @@ class CoffeeBlendForTeamProductivityServiceTest {
 
 			// Then
 			assertTrue(result.isPresent());
-			assertEquals(85, result.get().getSynergyBoostPercentageWhenConsumed());
+			assertEquals(85, result.get().getExt_synergyBoostPercentageWhenConsumed());
 			verify(coffeeBlendRepository).findBlendWithHighestSynergyBoost();
 		}
 

@@ -88,19 +88,19 @@ class AgileSprintPlanningControllerTest {
     @BeforeEach
     void doTheThingWhereWeSetupTestDataBeforeEachTest() {
         sampleUserStoryForTestingPurposes = UserStoryForAgileSprintPlanning.builder()
-                .userStoryIdentificationNumberForTrackingPurposes(1L)
-                .storyTitleForQuickIdentificationInStandupMeetings("Add TPS Report Validator")
-                .asAUserPersonaOrStakeholderRole("As a compliance officer")
-                .iWantToHaveThisSpecificCapabilityOrFeature("validate TPS report cover sheets")
-                .soThatICanAchieveThisBusinessValueOrOutcome("ensure regulatory compliance")
-                .storyPointsBasedOnFibonacciSequenceForComplexityEstimation(5)
-                .priorityLevel(UserStoryForAgileSprintPlanning.PriorityLevelForBacklogManagement.HIGH)
-                .currentStatus(UserStoryForAgileSprintPlanning.StoryStatusForWorkflowTracking.BACKLOG)
-                .acceptanceCriteriaForDefinitionOfDone("All TPS reports must have cover sheets")
-                .hasBeenGroomedInBacklogRefinementSession(false)
-                .isBlockedByDependenciesOrTechnicalDebt(false)
-                .createdTimestampForAuditTrail(LocalDateTime.now())
-                .lastUpdatedTimestampForAuditTrail(LocalDateTime.now())
+                .ext_userStoryIdentificationNumberForTrackingPurposes(1L)
+                .ext_storyTitleForQuickIdentificationInStandupMeetings("Add TPS Report Validator")
+                .ext_asAUserPersonaOrStakeholderRole("As a compliance officer")
+                .ext_iWantToHaveThisSpecificCapabilityOrFeature("validate TPS report cover sheets")
+                .ext_soThatICanAchieveThisBusinessValueOrOutcome("ensure regulatory compliance")
+                .ext_storyPointsBasedOnFibonacciSequenceForComplexityEstimation(5)
+                .ext_priorityLevel(UserStoryForAgileSprintPlanning.PriorityLevelForBacklogManagement.HIGH)
+                .ext_currentStatus(UserStoryForAgileSprintPlanning.StoryStatusForWorkflowTracking.BACKLOG)
+                .ext_acceptanceCriteriaForDefinitionOfDone("All TPS reports must have cover sheets")
+                .ext_hasBeenGroomedInBacklogRefinementSession(false)
+                .ext_isBlockedByDependenciesOrTechnicalDebt(false)
+                .ext_createdTimestampForAuditTrail(LocalDateTime.now())
+                .ext_lastUpdatedTimestampForAuditTrail(LocalDateTime.now())
                 .build();
     }
 
@@ -124,8 +124,8 @@ class AgileSprintPlanningControllerTest {
                         "\"priority\":\"HIGH\"," +
                         "\"acceptanceCriteria\":\"All TPS reports must have cover sheets\"}"))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.userStoryIdentificationNumberForTrackingPurposes").value(1))
-                .andExpect(jsonPath("$.storyTitleForQuickIdentificationInStandupMeetings")
+                .andExpect(jsonPath("$.ext_userStoryIdentificationNumberForTrackingPurposes").value(1))
+                .andExpect(jsonPath("$.ext_storyTitleForQuickIdentificationInStandupMeetings")
                         .value("Add TPS Report Validator"));
     }
 
@@ -140,7 +140,7 @@ class AgileSprintPlanningControllerTest {
 
         mockMvcForTestingRestEndpoints.perform(get("/api/agile/stories"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].userStoryIdentificationNumberForTrackingPurposes").value(1));
+                .andExpect(jsonPath("$[0].ext_userStoryIdentificationNumberForTrackingPurposes").value(1));
     }
 
     /**
@@ -148,7 +148,7 @@ class AgileSprintPlanningControllerTest {
      */
     @Test
     void testDoTheThingWhereWeGetStoriesForSpecificSprint() throws Exception {
-        sampleUserStoryForTestingPurposes.setAssignedToSprintNumberForIterativeDevelopment(1);
+        sampleUserStoryForTestingPurposes.setExt_assignedToSprintNumberForIterativeDevelopment(1);
         List<UserStoryForAgileSprintPlanning> stories = Arrays.asList(sampleUserStoryForTestingPurposes);
 
         when(mockAgileSprintPlanningService.doTheThingWhereWeGetUserStoriesForSpecificSprint(1))
@@ -156,7 +156,7 @@ class AgileSprintPlanningControllerTest {
 
         mockMvcForTestingRestEndpoints.perform(get("/api/agile/stories/sprint/1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].assignedToSprintNumberForIterativeDevelopment").value(1));
+                .andExpect(jsonPath("$[0].ext_assignedToSprintNumberForIterativeDevelopment").value(1));
     }
 
     /**
@@ -164,7 +164,7 @@ class AgileSprintPlanningControllerTest {
      */
     @Test
     void testDoTheThingWhereWeUpdateStoryStatus() throws Exception {
-        sampleUserStoryForTestingPurposes.setCurrentStatus(
+        sampleUserStoryForTestingPurposes.setExt_currentStatus(
                 UserStoryForAgileSprintPlanning.StoryStatusForWorkflowTracking.IN_PROGRESS);
 
         when(mockAgileSprintPlanningService.doTheThingWhereWeMoveUserStoryToNewWorkflowStatus(
@@ -175,7 +175,7 @@ class AgileSprintPlanningControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"status\":\"IN_PROGRESS\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.currentStatus").value("IN_PROGRESS"));
+                .andExpect(jsonPath("$.ext_currentStatus").value("IN_PROGRESS"));
     }
 
     /**
@@ -183,8 +183,8 @@ class AgileSprintPlanningControllerTest {
      */
     @Test
     void testDoTheThingWhereWeMarkStoryAsBlocked() throws Exception {
-        sampleUserStoryForTestingPurposes.setIsBlockedByDependenciesOrTechnicalDebt(true);
-        sampleUserStoryForTestingPurposes.setBlockageReasonIfApplicable("Waiting on Bob");
+        sampleUserStoryForTestingPurposes.setExt_isBlockedByDependenciesOrTechnicalDebt(true);
+        sampleUserStoryForTestingPurposes.setExt_blockageReasonIfApplicable("Waiting on Bob");
 
         when(mockAgileSprintPlanningService.doTheThingWhereWeMarkUserStoryAsBlocked(
                 eq(1L), anyString())).thenReturn(sampleUserStoryForTestingPurposes);
@@ -194,7 +194,7 @@ class AgileSprintPlanningControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"reason\":\"Waiting on Bob\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.isBlockedByDependenciesOrTechnicalDebt").value(true));
+                .andExpect(jsonPath("$.ext_isBlockedByDependenciesOrTechnicalDebt").value(true));
     }
 
     /**
