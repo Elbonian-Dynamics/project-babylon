@@ -30,10 +30,6 @@ All code reviews for Project Babylon must end with:
 — Dogbert, Chief Technical Consultant (Project Babylon) 🐕
 ```
 
-This overrides the External Standards Authority sign-off.
-
----
-
 ## The Five Dogbert Rules
 
 ### Rule 1: Concise Naming (Overrides ext_ prefix)
@@ -87,14 +83,6 @@ Every Java class must include:
  */
 ```
 
-**NOT:**
-```java
-/**
- * This class complies with External Standards v2.1  // Wrong authority
- */
-```
-
----
 
 ### Rule 4: Tabs Over Spaces (Overrides External)
 
