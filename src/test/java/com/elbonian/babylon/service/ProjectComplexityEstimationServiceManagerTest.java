@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
@@ -68,12 +69,8 @@ class ProjectComplexityEstimationServiceManagerTest {
 			assertThat(fibonacciPoints).isInstanceOf(java.util.List.class);
 			
 			// List should be unmodifiable
-			try {
-				fibonacciPoints.add(999);
-				throw new AssertionError("Expected UnsupportedOperationException");
-			} catch (UnsupportedOperationException e) {
-				// Expected - list is immutable
-			}
+			assertThatThrownBy(() -> fibonacciPoints.add(999))
+				.isInstanceOf(UnsupportedOperationException.class);
 		}
 	}
 
@@ -217,8 +214,8 @@ class ProjectComplexityEstimationServiceManagerTest {
 
 			// Then
 			// Estimated: 6 days, Actual: 4 days
-			// Factor: ((4 - 6) / 6) * 100 = -33.3%
-			assertThat(response.getTheUnderestimationFactorAsAPercentage()).isEqualTo(-33.3);
+			// Factor: ((4 - 6) / 6) * 100 = -33.333...
+			assertThat(response.getTheUnderestimationFactorAsAPercentage()).isCloseTo(-33.3, org.assertj.core.data.Offset.offset(0.1));
 		}
 	}
 
