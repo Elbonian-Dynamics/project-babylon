@@ -89,6 +89,12 @@ public class ProjectComplexityEstimationServiceManager {
 
 		log.info("🎯 Estimating project complexity for {} Fibonacci points - this should be quick!", fibonacciPoints);
 
+		// Handle null input by defaulting to 5 (medium complexity)
+		if (fibonacciPoints == null) {
+			log.warn("⚠️ Null Fibonacci points provided. Defaulting to 5.");
+			fibonacciPoints = 5;
+		}
+
 		// Validate Fibonacci points
 		if (!VALID_FIBONACCI_POINTS.contains(fibonacciPoints)) {
 			log.warn("⚠️ Invalid Fibonacci points: {}. Rounding to nearest valid value.", fibonacciPoints);
@@ -141,7 +147,7 @@ public class ProjectComplexityEstimationServiceManager {
 	 * Spoiler: It's always more than the estimate!
 	 */
 	private Integer doTheThingWhereWeUseRandomNumberGeneratorToGetActualDays(Integer fibonacciPoints) {
-		// Use random number generator with min = estimate, max = estimate * 3
+		// Use random number generator with min = fibonacciPoints, max = fibonacciPoints * 3 (e.g., 8 points → 8–24 days)
 		Integer min = fibonacciPoints;
 		Integer max = fibonacciPoints * 3;
 
