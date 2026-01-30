@@ -93,9 +93,9 @@ class ProjectComplexityEstimationControllerTest {
 			Map<String, Integer> requestBody = new HashMap<>();
 
 			ProjectComplexityEstimationResponseForEnterpriseValueCreation mockResponse =
-				buildMockEstimationResponse(5, 3, 10);
+				buildMockEstimationResponse(FIBONACCI_POINTS_5, ESTIMATED_DAYS_3, 10);
 
-			when(mockService.doTheThingWhereWeEstimateProjectComplexityBasedOnFibonacciPoints(5))
+			when(mockService.doTheThingWhereWeEstimateProjectComplexityBasedOnFibonacciPoints(FIBONACCI_POINTS_5))
 				.thenReturn(mockResponse);
 
 			// When
@@ -105,7 +105,7 @@ class ProjectComplexityEstimationControllerTest {
 			// Then
 			assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 			verify(mockService, times(1))
-				.doTheThingWhereWeEstimateProjectComplexityBasedOnFibonacciPoints(5);
+				.doTheThingWhereWeEstimateProjectComplexityBasedOnFibonacciPoints(FIBONACCI_POINTS_5);
 		}
 	}
 
@@ -153,7 +153,8 @@ class ProjectComplexityEstimationControllerTest {
 			assertThat(response.getBody()).containsKey("note");
 			assertThat(response.getBody()).containsKey("dogbertWisdom");
 
-			int[] fibonacciPoints = (int[]) response.getBody().get("validFibonacciPoints");
+			@SuppressWarnings("unchecked")
+			java.util.List<Integer> fibonacciPoints = (java.util.List<Integer>) response.getBody().get("validFibonacciPoints");
 			assertThat(fibonacciPoints).containsExactly(1, 2, 3, 5, 8, 13, 21, 40, 100);
 		}
 	}

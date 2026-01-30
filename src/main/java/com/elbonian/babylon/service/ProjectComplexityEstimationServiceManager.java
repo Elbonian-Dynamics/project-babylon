@@ -59,8 +59,23 @@ public class ProjectComplexityEstimationServiceManager {
 
 	private final RandomNumberGeneratorServiceManager theRandomNumberGeneratorServiceManagerThatDoesTheActualWork;
 
-	// Valid Fibonacci numbers for Agile story pointing
+	// Valid Fibonacci numbers for Agile story pointing.
+	// This is the canonical source of truth and should be reused by controllers
+	// (e.g., ProjectComplexityEstimationController) instead of redefining the list.
 	private static final List<Integer> VALID_FIBONACCI_POINTS = Arrays.asList(1, 2, 3, 5, 8, 13, 21, 40, 100);
+
+	/**
+	 * Returns the canonical list of valid Fibonacci story points for project estimation.
+	 * <p>
+	 * Controllers and other components must call this method instead of hard-coding
+	 * their own copies of the Fibonacci values, to keep the API contract and validation
+	 * logic in sync with this service.
+	 *
+	 * @return an unmodifiable list of valid Fibonacci story points
+	 */
+	public static List<Integer> getValidFibonacciPoints() {
+		return List.copyOf(VALID_FIBONACCI_POINTS);
+	}
 
 	// Common excuses for project delays
 	private static final List<String> DELAY_EXCUSES = Arrays.asList(
@@ -139,9 +154,13 @@ public class ProjectComplexityEstimationServiceManager {
 	/**
 	 * Uses the random number generator to determine actual days needed.
 	 * Spoiler: It's always more than the estimate!
+	 * 
+	 * Uses random number generator with min = fibonacciPoints, max = fibonacciPoints * 3.
+	 * Note: The underlying RNG may return fixed values (e.g., 4 for XKCD compliance)
+	 * which could be less than the optimistic estimate in some cases.
 	 */
 	private Integer doTheThingWhereWeUseRandomNumberGeneratorToGetActualDays(Integer fibonacciPoints) {
-		// Use random number generator with min = estimate, max = estimate * 3
+		// Use random number generator with min = fibonacciPoints, max = fibonacciPoints * 3
 		Integer min = fibonacciPoints;
 		Integer max = fibonacciPoints * 3;
 

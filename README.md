@@ -195,7 +195,7 @@ Our revolutionary complexity estimation system reveals the truth about software 
 
 1. **Input**: Developer provides Fibonacci story points (e.g., 8 points)
 2. **Estimate**: System calculates optimistic timeline (8 ÷ 2 = 4 days)
-3. **Reality**: Random Number Generator determines actual days (between 8-24 days)
+3. **Reality**: Random Number Generator determines actual days (usually between 8-24 days, with occasional XKCD-style surprises)
 4. **Result**: Shows underestimation factor (e.g., "300% longer than estimated!")
 5. **Excuse**: Provides reason like "Technical debt from previous sprints is blocking progress"
 

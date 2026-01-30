@@ -138,7 +138,7 @@ public class ProjectComplexityEstimationController {
 		log.info("📊 Valid Fibonacci numbers requested - moving the needle on Agile compliance!");
 
 		Map<String, Object> response = new HashMap<>();
-		response.put("validFibonacciPoints", new int[]{1, 2, 3, 5, 8, 13, 21, 40, 100});
+		response.put("validFibonacciPoints", ProjectComplexityEstimationServiceManager.getValidFibonacciPoints());
 		response.put("meanings", Map.of(
 			"1", "Trivial - change a button color",
 			"2", "Very Easy - add a log statement",
