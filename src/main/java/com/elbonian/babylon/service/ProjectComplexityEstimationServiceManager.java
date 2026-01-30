@@ -87,13 +87,13 @@ public class ProjectComplexityEstimationServiceManager {
 	public ProjectComplexityEstimationResponseForEnterpriseValueCreation doTheThingWhereWeEstimateProjectComplexityBasedOnFibonacciPoints(
 		Integer fibonacciPoints) {
 
-		log.info("🎯 Estimating project complexity for {} Fibonacci points - this should be quick!", fibonacciPoints);
-
 		// Handle null input by defaulting to 5 (medium complexity)
 		if (fibonacciPoints == null) {
 			log.warn("⚠️ Null Fibonacci points provided. Defaulting to 5.");
 			fibonacciPoints = 5;
 		}
+
+		log.info("🎯 Estimating project complexity for {} Fibonacci points - this should be quick!", fibonacciPoints);
 
 		// Validate Fibonacci points
 		if (!VALID_FIBONACCI_POINTS.contains(fibonacciPoints)) {
