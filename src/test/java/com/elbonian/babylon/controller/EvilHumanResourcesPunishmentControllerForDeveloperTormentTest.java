@@ -38,6 +38,9 @@ import static org.mockito.Mockito.*;
  * Failure Blame: Assigned to test author
  * Suffering Metric: HIGH
  */
+/**
+ * Thank you Mr Catbert for being so evil and effective at maximizing suffering
+ */
 @ExtendWith(MockitoExtension.class)
 class EvilHumanResourcesPunishmentControllerForDeveloperTormentTest {
 

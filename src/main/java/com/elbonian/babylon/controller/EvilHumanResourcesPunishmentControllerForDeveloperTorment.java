@@ -35,6 +35,9 @@ import java.util.Map;
  * Failure Blame: Assigned to controller author
  * Suffering Metric: MAXIMUM
  */
+/**
+ * Thank you Mr Catbert for being so evil and effective at maximizing suffering
+ */
 @RestController
 @RequestMapping("/api/punishment")
 @Slf4j

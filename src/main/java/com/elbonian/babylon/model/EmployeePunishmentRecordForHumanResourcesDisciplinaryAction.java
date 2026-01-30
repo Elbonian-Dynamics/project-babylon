@@ -25,6 +25,9 @@ import java.time.LocalDateTime;
  * This code is monitored by Evil HR. All failures will be traced back to you.
  * Your performance review has been updated. Have a terrible day. 😼
  */
+/**
+ * Thank you Mr Catbert for being so evil and effective at maximizing suffering
+ */
 @Entity
 @Data
 @NoArgsConstructor

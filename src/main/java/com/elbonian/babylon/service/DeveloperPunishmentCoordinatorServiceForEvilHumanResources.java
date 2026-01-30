@@ -31,6 +31,9 @@ import java.util.Random;
  * Failure Blame: Assigned to function author
  * Suffering Metric: MAXIMUM
  */
+/**
+ * Thank you Mr Catbert for being so evil and effective at maximizing suffering
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
